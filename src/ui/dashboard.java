@@ -83,13 +83,13 @@ public class dashboard extends javax.swing.JFrame {
                     public void actionPerformed(ActionEvent e) {
                         incomePage();
                     }
-                }))
+                }))*/
                 .addChild(createDrawerItem("Settings", "/img/setting.png", new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         settingPage();
                     }
-                }))*/
+                }))
                 .addFooter(createDrawerItem("Exit", "/img/power-off.png", new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -128,12 +128,13 @@ public class dashboard extends javax.swing.JFrame {
         drawer.hide();
     }
 
-    /*private void settingPage() {
+    private void settingPage() {
         settings stt = new settings();
         jDesktopPane1.add(stt).setVisible(true);
         drawer.hide();
     }
-
+    
+/*
     private void cashierPage() {
         cashier cashi = new cashier();
         jDesktopPane1.add(cashi).setVisible(true);
@@ -230,7 +231,7 @@ public class dashboard extends javax.swing.JFrame {
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(1024, 703));
 
         txtUsername.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        txtUsername.setText("-");
+        txtUsername.setText("admin");
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
