@@ -48,6 +48,12 @@ public class dashboard extends javax.swing.JFrame {
                         itemPage();
                     }
                 }))
+                .addChild(createDrawerItem("Barcode Print", "/img/barcode.png", new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        barcodePage();
+                    }
+                }))
                 /*.addChild(createDrawerItem("Cashier", "/img/cashier.png", new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -113,6 +119,12 @@ public class dashboard extends javax.swing.JFrame {
     private void itemPage() {
         product itm = new product();
         jDesktopPane1.add(itm).setVisible(true);
+        drawer.hide();
+    }
+    
+    private void barcodePage() {
+        barcodeproductList bar = new barcodeproductList();
+        jDesktopPane1.add(bar).setVisible(true);
         drawer.hide();
     }
 
