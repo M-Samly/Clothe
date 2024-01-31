@@ -272,6 +272,22 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
                 for (int i = 0; i < Qty; i++) {
                     BarcodePrint();
                 }
+                Connection con;
+                PreparedStatement pst1;
+                con = db.getConnection();
+
+                String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
+                pst1 = con.prepareStatement(query1);
+
+                pst1.setString(1, txtBarcode.getText().trim());
+                pst1.setString(2, txtName.getText().trim());
+                pst1.setInt(3, Qty);
+                pst1.executeUpdate();
+
+                txtBarcode.setText(null);
+                txtName.setText(null);
+                txtQty.setText(null);
+                txtSerchName.requestFocus();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);//"Alredy Add Product! ,Check The Product", "Save Error", JOptionPane.ERROR_MESSAGE);
@@ -430,6 +446,18 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
                     for (int i = 0; i < Qty; i++) {
                         BarcodePrint();
                     }
+                    Connection con;
+                    PreparedStatement pst1;
+                    con = db.getConnection();
+
+                    String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
+                    pst1 = con.prepareStatement(query1);
+
+                    pst1.setString(1, txtBarcode.getText().trim());
+                    pst1.setString(2, txtName.getText().trim());
+                    pst1.setInt(3, Qty);
+                    pst1.executeUpdate();
+
                     txtBarcode.setText(null);
                     txtName.setText(null);
                     txtQty.setText(null);

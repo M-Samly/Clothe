@@ -468,7 +468,7 @@ public class addProduct extends javax.swing.JInternalFrame {
                                             try {
 
                                                 Connection con;
-                                                PreparedStatement pst;
+                                                PreparedStatement pst, pst1;
                                                 con = db.getConnection();
 
                                                 String query = "Insert into product (Barcode,Name,Quantity,BPrice,WPrice,RPrice) values (?,?,?,?,?,?)";
@@ -493,6 +493,13 @@ public class addProduct extends javax.swing.JInternalFrame {
                                                     for (int i = 0; i < Qty; i++) {
                                                         BarcodePrint();
                                                     }
+                                                    String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
+                                                    pst1 = con.prepareStatement(query1);
+
+                                                    pst1.setString(1, txtBarcode.getText().trim());
+                                                    pst1.setString(2, txtName.getText().trim());
+                                                    pst1.setInt(3, Qty);
+                                                    pst1.executeUpdate();
                                                 }
 
                                                 txtBarcode.setText(null);
@@ -593,7 +600,7 @@ public class addProduct extends javax.swing.JInternalFrame {
                                     } else {
                                         try {
                                             Connection con;
-                                            PreparedStatement pst;
+                                            PreparedStatement pst, pst1;
                                             con = db.getConnection();
 
                                             String query = "Insert into product (Barcode,Name,Quantity,BPrice,WPrice,RPrice) values (?,?,?,?,?,?)";
@@ -618,6 +625,13 @@ public class addProduct extends javax.swing.JInternalFrame {
                                                 for (int i = 0; i < Qty; i++) {
                                                     BarcodePrint();
                                                 }
+                                                String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
+                                                pst1 = con.prepareStatement(query1);
+
+                                                pst1.setString(1, txtBarcode.getText().trim());
+                                                pst1.setString(2, txtName.getText().trim());
+                                                pst1.setInt(3, Qty);
+                                                pst1.executeUpdate();
                                             }
 
                                             txtBarcode.setText(null);
