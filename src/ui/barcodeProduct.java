@@ -287,6 +287,8 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
                 txtBarcode.setText(null);
                 txtName.setText(null);
                 txtQty.setText(null);
+                txtSerchName.setText(null);
+                txtSearchBarcode.setText(null);
                 txtSerchName.requestFocus();
             }
         } catch (Exception e) {
@@ -304,7 +306,7 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
             HashMap m = new HashMap();
             m.put("barcode", barcode);
             try {
-                JasperDesign jdesing = JRXmlLoader.load("E:\\M.Samly\\Clothing Management System\\Cloth_System\\src\\print\\newbarcode.jrxml");//("C:\\Users\\msham.DESKTOP-RE7Q19V\\Desktop\\TonyCash\\src\\UI\\report1.jrxml");//
+                JasperDesign jdesing = JRXmlLoader.load("E:\\M.Samly\\Clothing Management System\\Cloth_System\\src\\print\\barcode.jrxml");//("C:\\Users\\msham.DESKTOP-RE7Q19V\\Desktop\\TonyCash\\src\\UI\\report1.jrxml");//
                 JasperReport ireport = JasperCompileManager.compileReport(jdesing);
                 JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);
                 //JasperViewer.viewReport(jprint);
@@ -401,6 +403,7 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
             int i = tblProduct.getSelectedRow();
             TableModel model = tblProduct.getModel();
+            txtBarcode.setText(model.getValueAt(i, 0).toString());
             txtName.setText(model.getValueAt(i, 1).toString());
         }
     }//GEN-LAST:event_tblProductKeyReleased
@@ -461,6 +464,8 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
                     txtBarcode.setText(null);
                     txtName.setText(null);
                     txtQty.setText(null);
+                    txtSerchName.setText(null);
+                    txtSearchBarcode.setText(null);
                     txtSerchName.requestFocus();
                 }
             } catch (Exception e) {

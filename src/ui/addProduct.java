@@ -683,7 +683,7 @@ public class addProduct extends javax.swing.JInternalFrame {
             HashMap m = new HashMap();
             m.put("barcode", barcode);
             try {
-                JasperDesign jdesing = JRXmlLoader.load("E:\\M.Samly\\Clothing Management System\\Cloth_System\\src\\print\\newbarcode.jrxml");//("C:\\Users\\msham.DESKTOP-RE7Q19V\\Desktop\\TonyCash\\src\\UI\\report1.jrxml");//
+                JasperDesign jdesing = JRXmlLoader.load("E:\\M.Samly\\Clothing Management System\\Cloth_System\\src\\print\\barcode.jrxml");
                 JasperReport ireport = JasperCompileManager.compileReport(jdesing);
                 JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);
                 //JasperViewer.viewReport(jprint);
