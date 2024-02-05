@@ -385,7 +385,15 @@ public class addProduct extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Barcode already used!");
                     txtBarcode.requestFocus();
                 } else {
-                    txtName.requestFocus();
+                    int barcodeLenght = barcode.length();
+                    if (barcodeLenght < 9) {
+                        String newbarcode = "";
+                        for (int i = 0; i < (9 - barcodeLenght); i++) {
+                            newbarcode = newbarcode + 0;
+                        }
+                        txtBarcode.setText(newbarcode + barcode);
+                        txtName.requestFocus();
+                    }
                 }
             } else {
                 txtBarcode.requestFocus();
@@ -465,6 +473,14 @@ public class addProduct extends javax.swing.JInternalFrame {
                                             JOptionPane.showMessageDialog(null, "Product Name already used!");
                                             txtName.requestFocus();
                                         } else {
+                                            int barcodeLenght = barcode.length();
+                                            if (barcodeLenght < 9) {
+                                                String newbarcode = "";
+                                                for (int i = 0; i < (9 - barcodeLenght); i++) {
+                                                    newbarcode = newbarcode + 0;
+                                                }
+                                                txtBarcode.setText(newbarcode + barcode);
+                                            }
                                             try {
 
                                                 Connection con;
@@ -598,6 +614,14 @@ public class addProduct extends javax.swing.JInternalFrame {
                                         JOptionPane.showMessageDialog(null, "Product Name already used!");
                                         txtName.requestFocus();
                                     } else {
+                                        int barcodeLenght = barcode.length();
+                                        if (barcodeLenght < 9) {
+                                            String newbarcode = "";
+                                            for (int i = 0; i < (9 - barcodeLenght); i++) {
+                                                newbarcode = newbarcode + 0;
+                                            }
+                                            txtBarcode.setText(newbarcode + barcode);
+                                        }
                                         try {
                                             Connection con;
                                             PreparedStatement pst, pst1;

@@ -54,13 +54,13 @@ public class dashboard extends javax.swing.JFrame {
                         barcodePage();
                     }
                 }))
-                /*.addChild(createDrawerItem("Cashier", "/img/cashier.png", new ActionListener() {
+                .addChild(createDrawerItem("Cashier", "/img/cashier.png", new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         cashierPage();
                     }
                 }))
-                .addChild(createDrawerItem("Loan", "/img/loan.png", new ActionListener() {
+                /*.addChild(createDrawerItem("Loan", "/img/loan.png", new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         loanPage();
@@ -134,15 +134,15 @@ public class dashboard extends javax.swing.JFrame {
         drawer.hide();
     }
     
-/*
     private void cashierPage() {
         cashier cashi = new cashier();
         jDesktopPane1.add(cashi).setVisible(true);
-        cashier.txtSearchName.requestFocus();
+        cashier.txtSearchBarcode.requestFocus();
+        cashier.txtUserName.setText(txtUsername.getText());
         drawer.hide();
     }
 
-    private void loanPage() {
+    /*private void loanPage() {
         loanList ln = new loanList();
         jDesktopPane1.add(ln).setVisible(true);
         drawer.hide();
