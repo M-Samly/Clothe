@@ -11,29 +11,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
  * @author M_Samly
  */
-public class searchName extends javax.swing.JInternalFrame {
+public class alert extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Loan
      */
-    public searchName() {
+    public alert() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
-
+        
         show_Retail();
     }
 
@@ -44,7 +42,7 @@ public class searchName extends javax.swing.JInternalFrame {
             Statement st;
             con = db.getConnection();
             st = con.createStatement();
-            String query = "Select * from product where quantity > 0 order by barcode";
+            String query = "Select * from product where quantity < 5 order by quantity";
             ResultSet rs = st.executeQuery(query);
             cashierCode pro;
             while (rs.next()) {
@@ -111,11 +109,6 @@ public class searchName extends javax.swing.JInternalFrame {
             }
         });
         tblProduct.getTableHeader().setReorderingAllowed(false);
-        tblProduct.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblProductMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tblProduct);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -148,15 +141,15 @@ public class searchName extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Search Product");
+        jLabel1.setText("Quantity Alert");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(127, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,21 +159,24 @@ public class searchName extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSearchBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(164, 164, 164))
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
+                        .addGap(8, 8, 8)
                         .addComponent(jButton1)
-                        .addGap(54, 54, 54))
+                        .addGap(53, 53, 53))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,9 +186,9 @@ public class searchName extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtSearchBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -272,121 +268,6 @@ public class searchName extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Cannot find Item Name", "Search Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtSearchBarcodeKeyReleased
-
-    private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
-        // TODO add your handling code here:
-        int k = tblProduct.getSelectedRow();
-        TableModel model1 = tblProduct.getModel();
-        String barcode = (model1.getValueAt(k, 0).toString());
-        txtSearchBarcode.setText(barcode);
-
-        String name = "";
-        float rprice = 0;
-        boolean sameProduct = false;
-        boolean status = false;
-        int rowNumber = 0;
-        int j = 0;
-
-        String type = cashier.txtType.getText();
-
-        try {
-            Connection con;
-            Statement st;
-            con = db.getConnection();
-            st = con.createStatement();
-
-            String query = "Select barcode,name,rprice,wprice From product where barcode = '" + txtSearchBarcode.getText() + "'";
-            PreparedStatement pst = con.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                barcode = rs.getString("barcode");
-                name = rs.getString("name");
-                if (type == "Retail") {
-                    rprice = rs.getFloat("rprice");
-                } else {
-                    rprice = rs.getFloat("wprice");
-                }
-                String searchBarcode = txtSearchBarcode.getText();
-                if (searchBarcode.equals(barcode)) {
-                    sameProduct = true;
-                }
-            }
-
-            if (sameProduct == true) {
-                //txtOk.requestFocus();
-                DefaultTableModel model = new DefaultTableModel();
-                model = (DefaultTableModel) cashier.tblBill.getModel();
-                if (model.getRowCount() == 0) {
-                    model.addRow(new Object[]{
-                        barcode,
-                        name,
-                        rprice,
-                        1,
-                        0.00,
-                        rprice,}
-                    );
-                } else {
-                    for (int i = 0; i < model.getRowCount(); i++) {
-                        String tableBarcode = model.getValueAt(i, 0).toString();
-                        if (barcode.equals(tableBarcode)) {
-                            status = true;
-                            rowNumber = i;
-                        }
-                    }
-                    if (status == true) {
-                        int qunatity = Integer.parseInt(model.getValueAt(rowNumber, 3).toString()) + 1;
-                        model.setValueAt(qunatity, rowNumber, 3);
-                        float price = Float.parseFloat(model.getValueAt(rowNumber, 5).toString()) + rprice;
-                        model.setValueAt(price, rowNumber, 5);
-
-                        status = false;
-                        rowNumber = 0;
-                    } else {
-                        model.addRow(new Object[]{
-                            barcode,
-                            name,
-                            rprice,
-                            1,
-                            0.00,
-                            rprice,}
-                        );
-                    }
-                }
-
-                sameProduct = false;
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid Barcode");
-            }
-
-            barcode = "";
-            name = "";
-            rprice = 0;
-            sameProduct = true;
-            status = false;
-            rowNumber = 0;
-
-            txtSearchBarcode.setText(null);
-            txtSearchBarcode.requestFocus();
-
-            float sum = 0;
-            float discounttot = 0;
-            for (int i = 0; i < cashier.tblBill.getRowCount(); i++) {
-                discounttot = discounttot + Float.parseFloat(cashier.tblBill.getValueAt(i, 4).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
-                sum = sum + Float.parseFloat(cashier.tblBill.getValueAt(i, 5).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
-                j = i + 1;
-            }
-            float returnamount = Float.parseFloat(cashier.txtReturn.getText());
-            float finalsum = sum - returnamount;
-            cashier.txtItem.setText(Integer.toString(j));
-            cashier.txtTotalAmount.setText(String.valueOf(new DecimalFormat("0.00").format(finalsum)));
-            cashier.txtTotalDiscount.setText(String.valueOf(new DecimalFormat("0.00").format(discounttot)));
-
-            //txtQty.requestFocus();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);//"Cannot find Item Name", "Search Error", JOptionPane.ERROR_MESSAGE);
-        }
-        this.dispose();
-    }//GEN-LAST:event_tblProductMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:

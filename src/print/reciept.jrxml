@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="193" pageHeight="623" columnWidth="185" leftMargin="4" rightMargin="4" topMargin="4" bottomMargin="4" uuid="4f420e23-7ecb-4782-9a59-6fbcd63b798e">
 	<property name="ireport.zoom" value="3.1384283767210035"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="284"/>
+	<property name="ireport.y" value="139"/>
 	<parameter name="Invoiceno" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -136,7 +136,7 @@ FROM
 	<columnHeader>
 		<band height="13" splitType="Stretch">
 			<staticText>
-				<reportElement x="136" y="1" width="37" height="11" uuid="5334cd61-7c5a-4e9c-afe3-f6b82b10a627"/>
+				<reportElement x="136" y="1" width="47" height="11" uuid="5334cd61-7c5a-4e9c-afe3-f6b82b10a627"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Trebuchet MS" size="6" isBold="true"/>
 				</textElement>
@@ -153,15 +153,15 @@ FROM
 				<reportElement x="0" y="12" width="185" height="1" uuid="af2b3f33-9958-4be8-8ce8-f723947bbcb3"/>
 			</line>
 			<staticText>
-				<reportElement x="94" y="1" width="13" height="11" uuid="bd08f3e3-d974-4f5e-b563-caf9aa9dd1be"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="94" y="1" width="15" height="11" uuid="bd08f3e3-d974-4f5e-b563-caf9aa9dd1be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Trebuchet MS" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Qty]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="109" y="1" width="23" height="11" uuid="9ba5cad6-f2a3-4f60-93b9-a0c2947330d0"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="114" y="1" width="27" height="11" uuid="9ba5cad6-f2a3-4f60-93b9-a0c2947330d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Trebuchet MS" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Price]]></text>
@@ -174,15 +174,15 @@ FROM
 	<detail>
 		<band height="11" splitType="Stretch">
 			<textField>
-				<reportElement x="2" y="0" width="85" height="11" uuid="a4182ef0-86e3-4e18-85f6-e23f347a673a"/>
+				<reportElement x="2" y="0" width="92" height="11" uuid="a4182ef0-86e3-4e18-85f6-e23f347a673a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Trebuchet MS" size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sales_product_Name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="94" y="0" width="13" height="11" uuid="817d731a-dd28-47e5-8e11-12ffc6839fb9"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="94" y="0" width="15" height="11" uuid="817d731a-dd28-47e5-8e11-12ffc6839fb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Trebuchet MS" size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sales_product_Quantity}]]></textFieldExpression>
@@ -209,7 +209,7 @@ FROM
 				<text><![CDATA[0]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="137" y="0" width="6" height="11" uuid="1d3e831b-e403-46bb-873e-58dab728c54e"/>
+				<reportElement x="136" y="0" width="6" height="11" uuid="1d3e831b-e403-46bb-873e-58dab728c54e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Trebuchet MS" size="6" isBold="false"/>
 				</textElement>

@@ -19,7 +19,7 @@ public class db {
     /*private static final String JDBC_URL = "jdbc:mysql://mamfarmhouse.com/mamfarmh_wp59418";
     private static final String USERNAME = "mamfarmh_wp59418";
     private static final String PASSWORD = ")65p48.ESg";
-    */
+     */
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/cloth";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";

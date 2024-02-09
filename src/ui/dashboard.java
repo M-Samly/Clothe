@@ -60,7 +60,7 @@ public class dashboard extends javax.swing.JFrame {
                         cashierPage();
                     }
                 }))
-                /*.addChild(createDrawerItem("Loan", "/img/loan.png", new ActionListener() {
+                .addChild(createDrawerItem("Loan", "/img/loan.png", new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         loanPage();
@@ -83,7 +83,7 @@ public class dashboard extends javax.swing.JFrame {
                     public void actionPerformed(ActionEvent e) {
                         incomePage();
                     }
-                }))*/
+                }))
                 .addChild(createDrawerItem("Settings", "/img/setting.png", new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -121,7 +121,7 @@ public class dashboard extends javax.swing.JFrame {
         jDesktopPane1.add(itm).setVisible(true);
         drawer.hide();
     }
-    
+
     private void barcodePage() {
         barcodeproductList bar = new barcodeproductList();
         jDesktopPane1.add(bar).setVisible(true);
@@ -133,7 +133,7 @@ public class dashboard extends javax.swing.JFrame {
         jDesktopPane1.add(stt).setVisible(true);
         drawer.hide();
     }
-    
+
     private void cashierPage() {
         cashier cashi = new cashier();
         jDesktopPane1.add(cashi).setVisible(true);
@@ -142,7 +142,7 @@ public class dashboard extends javax.swing.JFrame {
         drawer.hide();
     }
 
-    /*private void loanPage() {
+    private void loanPage() {
         loanList ln = new loanList();
         jDesktopPane1.add(ln).setVisible(true);
         drawer.hide();
@@ -200,7 +200,8 @@ public class dashboard extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }*/
+    }
+
     private void logOut() {
         this.dispose();
         login lg = new login();
@@ -235,7 +236,7 @@ public class dashboard extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Welcome to M H M Hardaware");
+        jLabel1.setText("Welcome to SHOP");
 
         jDesktopPane1.setLayer(txtUsername, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
