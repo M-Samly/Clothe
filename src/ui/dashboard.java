@@ -10,13 +10,26 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.Drawer;
 import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
 /**
  *
@@ -88,6 +101,12 @@ public class dashboard extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         settingPage();
+                    }
+                }))
+                .addChild(createDrawerItem("Print", "/img/re bill.png", new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        print();
                     }
                 }))
                 .addFooter(createDrawerItem("Exit", "/img/power-off.png", new ActionListener() {
@@ -206,6 +225,316 @@ public class dashboard extends javax.swing.JFrame {
         this.dispose();
         login lg = new login();
         lg.setVisible(true);
+    }
+
+    private void print() {
+        dailyIncome();
+        monthIncome();
+        monthlyIncome();
+        productIncome();
+        yearIncome();
+        yearlyIncome();
+        report();
+        income();
+        Barcode();
+        drawer.hide();
+    }
+
+    public void dailyIncome() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\incomeDBD.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/dailyIncome.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void monthIncome() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\incomeMonth.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/monthIncome.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void monthlyIncome() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\incomeMBM.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/monthlyIncome.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void productIncome() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\incomeProduct.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/ProductIncome.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void yearIncome() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\incomeYear.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/yearIncome.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void yearlyIncome() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\incomeYBY.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/yearlyIncome.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void report() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\report.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/report.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void income() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\income.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/allincome.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Barcode() {
+        try {
+            String folder = "";
+            String jrmxl = "";
+            Connection conn = db.getConnection();
+            try {
+                Statement st = conn.createStatement();
+                String query = "Select printfolderpath,jrxml from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    folder = rs.getString("printfolderpath");
+                    jrmxl = rs.getString("jrxml");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            String reportPath = jrmxl + "\\barcodeList.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(folder + "/BarcodeList.pdf")); // Output PDF file path
+
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

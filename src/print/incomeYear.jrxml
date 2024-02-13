@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="581" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" uuid="ab1da044-14fc-4b41-b86a-0cd5568d147c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="incomeYear" uuid="78b74b1e-b039-4764-9efa-f268c4d859be">
+		<queryString language="SQL">
+			<![CDATA[Select * from product_income where year = year(curdate()) order by barcode]]>
+		</queryString>
+		<field name="date" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="barcode" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="name" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="income" class="java.lang.Float">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[Select * from product_income where year = year(curdate()) order by barcode]]>
+	</queryString>
+	<field name="date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="barcode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="income" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="225" y="5" width="118" height="20" uuid="67064029-d466-4373-8a27-db76e724d567"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[This Year Income]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="434" y="5" width="141" height="20" uuid="ab47762e-d71a-435d-b5ab-99c271d2bffd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="67" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="80" y="9" width="390" height="50" uuid="b2d3a935-41ef-413a-915c-658f233b29af"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="incomeYear" uuid="23effe45-075c-4c4e-a282-61a1e843e956">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="09671291-2f1e-46f6-82ce-8f2b69544d7e">
+						<jr:columnHeader style="table_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="22" uuid="6ad1bf65-e64b-4b80-801e-f7fb079cd4ee"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Date]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement x="0" y="0" width="90" height="20" uuid="70a36efa-9b7f-4266-9e2f-809bd528ef72"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="102" uuid="c973baa4-22b4-4dec-b71b-8a01166ddb41">
+						<jr:columnHeader style="table_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="102" height="22" uuid="b3ac2d43-bcab-4d4c-95ce-b1ad246de968"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Barcode]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="102" height="20" uuid="020d803d-3f26-4ad7-95f4-dfc9d75e2e93"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="136" uuid="6415cab4-8405-4d6c-a209-041c90fcb1b1">
+						<jr:columnHeader style="table_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="136" height="22" uuid="6c5d903d-8699-41ec-8cc1-89b0a375bb02"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Name]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="136" height="20" uuid="971b85ff-7a25-4df4-8067-1c4cf85636fc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="aaf2f422-8176-4250-913e-f861f8295885">
+						<jr:columnHeader style="table_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="22" uuid="698eeec0-5dfa-4ab9-aa91-84c700337f85"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Income]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="8d52cccb-7c88-474c-ae41-51686b74f7a9"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{income}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

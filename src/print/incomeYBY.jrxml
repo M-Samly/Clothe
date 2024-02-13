@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="581" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" uuid="169b8b48-bd40-4eb0-ab66-05a1bbd83c55">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="incomeYearly" uuid="3b65c9e3-8f23-4b22-9ffa-f39c53a4df16">
+		<queryString language="SQL">
+			<![CDATA[SELECT year, SUM(income) AS income FROM product_income GROUP BY year ORDER BY year]]>
+		</queryString>
+		<field name="year" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="income" class="java.lang.Double"/>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT year, SUM(income) AS income FROM product_income GROUP BY year ORDER BY year]]>
+	</queryString>
+	<field name="year" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="income" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="240" y="7" width="100" height="20" uuid="8c6a7870-6589-44f6-ad82-b76fc9bb6a16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Yealry Income]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="387" y="7" width="148" height="20" uuid="250af8fa-444f-4d9e-8028-369a508aea1a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="65" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="200" y="8" width="180" height="50" uuid="94c50b17-a6d9-488f-ba07-79fb959dfec6"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="incomeYearly" uuid="5ac72b47-e24c-4a9c-a960-e25a6bca1f11">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="1bc9dd11-96d1-4ca0-9315-91d8173c90eb">
+						<jr:columnHeader style="table 1_CH" height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="24" uuid="463de6a5-5089-4962-82d9-4134912a7c92"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Year]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="e4c063e7-6ba4-460f-8d9b-a3e8b90d7761"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{year}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="cb1b79b8-aaae-4681-8285-309901fb84d0">
+						<jr:columnHeader style="table 1_CH" height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="24" uuid="78ace713-1047-4435-bd2c-238c138229e4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Income]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="6b3f44a2-12c9-4ccd-ac71-d5769a3c3b47"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{income}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

@@ -42,7 +42,7 @@ public class incomeproduct extends javax.swing.JInternalFrame {
             Statement st;
             con = db.getConnection();
             st = con.createStatement();
-            String query = "Select * from product_income order by barcode";
+            String query = "Select date, barcode, name, SUM(income) as income from product_income GROUP by barcode order by barcode";
             ResultSet rs = st.executeQuery(query);
             incomeCode pro;
             while (rs.next()) {
@@ -256,7 +256,7 @@ public class incomeproduct extends javax.swing.JInternalFrame {
             Statement st;
             con = db.getConnection();
             st = con.createStatement();
-            String query = "Select * from product_income where name like '" + val + "%' ";
+            String query = "Select date, barcode, name, SUM(income) as income from product_income where name like '" + val + "%' GROUP by barcode order by barcode";
             ResultSet rs = st.executeQuery(query);
             incomeCode pro;
             while (rs.next()) {
@@ -289,7 +289,7 @@ public class incomeproduct extends javax.swing.JInternalFrame {
             String data[] = {};
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.addRow(data);
-            String data1[] = {"", "", "Total Income", txtIncome.getText()};
+            String data1[] = {"", "", "Product Income", txtIncome.getText()};
             DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
             model1.addRow(data1);
             jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer);

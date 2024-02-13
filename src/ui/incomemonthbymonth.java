@@ -110,7 +110,7 @@ public class incomemonthbymonth extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Date", "Income"
+                "Month", "Income"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -256,7 +256,7 @@ public class incomemonthbymonth extends javax.swing.JInternalFrame {
             String data[] = {};
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.addRow(data);
-            String data1[] = {"", "", "Total Income", txtIncome.getText()};
+            String data1[] = {"", "", "Monthly Income", txtIncome.getText()};
             DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
             model1.addRow(data1);
             jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer);

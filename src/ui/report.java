@@ -57,7 +57,7 @@ public class report extends javax.swing.JInternalFrame {
 
     public void show_Report() {
         ArrayList<reportCode> al = reportList();
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
         Object[] row = new Object[11];
         for (int i = 0; i < al.size(); i++) {
             row[0] = al.get(i).getBilno();
@@ -78,8 +78,8 @@ public class report extends javax.swing.JInternalFrame {
 
     public void totalincome() {
         float totalincome = 0;
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            float Total = (Float.parseFloat(jTable1.getValueAt(i, 9).toString()));
+        for (int i = 0; i < tblReport.getRowCount(); i++) {
+            float Total = (Float.parseFloat(tblReport.getValueAt(i, 9).toString()));
             totalincome = totalincome + Total;
         }
         txtIncome.setText(String.valueOf(new DecimalFormat("0.00").format(totalincome)));
@@ -97,7 +97,7 @@ public class report extends javax.swing.JInternalFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblReport = new javax.swing.JTable();
         txtIncome = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -116,7 +116,7 @@ public class report extends javax.swing.JInternalFrame {
 
         jPanel4.setPreferredSize(new java.awt.Dimension(1024, 662));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblReport.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -132,20 +132,20 @@ public class report extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(7).setResizable(false);
-            jTable1.getColumnModel().getColumn(8).setResizable(false);
-            jTable1.getColumnModel().getColumn(9).setResizable(false);
-            jTable1.getColumnModel().getColumn(10).setResizable(false);
+        tblReport.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblReport);
+        if (tblReport.getColumnModel().getColumnCount() > 0) {
+            tblReport.getColumnModel().getColumn(0).setResizable(false);
+            tblReport.getColumnModel().getColumn(1).setResizable(false);
+            tblReport.getColumnModel().getColumn(2).setResizable(false);
+            tblReport.getColumnModel().getColumn(3).setResizable(false);
+            tblReport.getColumnModel().getColumn(4).setResizable(false);
+            tblReport.getColumnModel().getColumn(5).setResizable(false);
+            tblReport.getColumnModel().getColumn(6).setResizable(false);
+            tblReport.getColumnModel().getColumn(7).setResizable(false);
+            tblReport.getColumnModel().getColumn(8).setResizable(false);
+            tblReport.getColumnModel().getColumn(9).setResizable(false);
+            tblReport.getColumnModel().getColumn(10).setResizable(false);
         }
 
         txtIncome.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -318,7 +318,7 @@ public class report extends javax.swing.JInternalFrame {
                 al.add(pro);
             }
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
             model.setRowCount(0);
             Object[] row = new Object[11];
             for (int i = 0; i < al.size(); i++) {
@@ -359,7 +359,7 @@ public class report extends javax.swing.JInternalFrame {
                 al.add(pro);
             }
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
             model.setRowCount(0);
             Object[] row = new Object[11];
             for (int i = 0; i < al.size(); i++) {
@@ -400,7 +400,7 @@ public class report extends javax.swing.JInternalFrame {
                 al.add(pro);
             }
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
             model.setRowCount(0);
             Object[] row = new Object[11];
             for (int i = 0; i < al.size(); i++) {
@@ -429,17 +429,17 @@ public class report extends javax.swing.JInternalFrame {
             MessageFormat header = new MessageFormat("All Reports");
             MessageFormat footer = new MessageFormat("Page{0, number, integer}");
             String data[] = {};
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
             model.addRow(data);
             String data1[] = {"", "", "", "", "", "", "", "", "", "Total Sales", txtIncome.getText()};
-            DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model1 = (DefaultTableModel) tblReport.getModel();
             model1.addRow(data1);
-            jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+            tblReport.print(JTable.PrintMode.FIT_WIDTH, header, footer);
             
             txtsearchbybillno.setText(null);
             txtsearchbycustomer.setText(null);
             txtsearchbydate.setText(null);
-            DefaultTableModel model2 = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model2 = (DefaultTableModel) tblReport.getModel();
             model2.setRowCount(0);
             show_Report();
             
@@ -459,8 +459,8 @@ public class report extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel txtIncome;
+    public static javax.swing.JTable tblReport;
+    public static javax.swing.JLabel txtIncome;
     private javax.swing.JTextField txtsearchbybillno;
     private javax.swing.JTextField txtsearchbycustomer;
     private javax.swing.JTextField txtsearchbydate;
