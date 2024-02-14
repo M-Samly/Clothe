@@ -967,20 +967,32 @@ public class returnCashier extends javax.swing.JInternalFrame {
             PreparedStatement pst, pst1, pst2, pst3, pst4, pst5;
             con = db.getConnection();
             int bill = Integer.parseInt(txtBillNo.getText());
+            String jrmxl = "";
+            String name = "";
+            String address = "";
+            String phone1 = "";
+            String phone2 = "";
+            try {
+                Statement st = con.createStatement();
+                String query = "Select name,jrxml,address,phone1,phone2 from shop_details where sh_id = 1";
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    jrmxl = rs.getString("jrxml");
+                    name = rs.getString("name");
+                    address = rs.getString("address");
+                    phone1 = rs.getString("phone1");
+                    phone2 = rs.getString("phone2");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
             HashMap m = new HashMap();
+            m.put("shopname", name);
+            m.put("address", address);
+            m.put("phone1", phone1);
+            m.put("phone2", phone2);
             m.put("Invoiceno", (bill - 1));
             try {
-                String jrmxl = "";
-                try {
-                    Statement st = con.createStatement();
-                    String query = "Select jrxml from shop_details where sh_id = 1";
-                    ResultSet rs = st.executeQuery(query);
-                    while (rs.next()) {
-                        jrmxl = rs.getString("jrxml");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
                 JasperDesign jdesing = JRXmlLoader.load(jrmxl + "\\returnReciept.jrxml");
                 JasperReport ireport = JasperCompileManager.compileReport(jdesing);
                 JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);

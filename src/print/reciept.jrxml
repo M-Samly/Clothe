@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="193" pageHeight="623" columnWidth="185" leftMargin="4" rightMargin="4" topMargin="4" bottomMargin="4" uuid="4f420e23-7ecb-4782-9a59-6fbcd63b798e">
-	<property name="ireport.zoom" value="3.1384283767210035"/>
+	<property name="ireport.zoom" value="1.7715610000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="139"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="Invoiceno" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="shopname" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="phone1" class="java.lang.String"/>
+	<parameter name="phone2" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      sales_product.`b_id` AS sales_product_Id,
@@ -52,32 +56,11 @@ FROM
 				<reportElement x="0" y="0" width="185" height="45" uuid="7de6037f-6b30-47f2-b9e2-a0db601b8886"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="2" width="185" height="20" uuid="84794825-c213-4063-a8f6-41c0f06d3d70"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Shop]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="33" width="185" height="11" uuid="a2a8593e-6999-4fce-8cd9-5e3c4379910f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Phone]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="109" y="56" width="33" height="9" uuid="ae93bea4-d8bc-4e37-b659-d4d49f74c371"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Trebuchet MS" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Customer :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="22" width="185" height="11" uuid="5eb4f106-8084-4137-9bf3-aa79bcfac03f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Address]]></text>
 			</staticText>
 			<textField pattern="h.mm.ss a">
 				<reportElement x="53" y="46" width="34" height="10" uuid="3fbd62e3-01c3-4970-930f-c7b38a939b7d"/>
@@ -128,6 +111,41 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sales_Customer}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="185" height="22" uuid="548b7217-acde-4bf8-9a9a-a7ccb96f2bf7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{shopname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="33" width="88" height="11" uuid="c6006572-3661-49ee-a80e-4a3af1268f14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{phone2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="33" width="88" height="11" uuid="42a6e059-77d0-4544-8601-0f6dd24daddc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{phone1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="22" width="185" height="11" uuid="69bc9b60-97bf-410e-a959-89a6e6e58537"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="91" y="33" width="4" height="11" uuid="66ebb3d6-a064-4bc5-a24c-d5c573c1053c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[|]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>

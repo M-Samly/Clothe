@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="193" pageHeight="623" columnWidth="185" leftMargin="4" rightMargin="4" topMargin="4" bottomMargin="4" uuid="571e841e-2ed3-47b8-8ede-2b50e90bd762">
-	<property name="ireport.zoom" value="3.138428376721004"/>
+	<property name="ireport.zoom" value="2.143588810000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.y" value="102"/>
 	<parameter name="Invoiceno" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="shopname" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="phone1" class="java.lang.String"/>
+	<parameter name="phone2" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      sales_product.`b_id` AS sales_product_Id,
@@ -25,7 +29,7 @@
      sales.`payment` AS sales_Payment,
      sales.`balance` AS sales_Balance
 FROM
-     `sales_product` sales_product INNER JOIN `sales` sales ON sales_product.`b_id` = sales.`b_id` WHERE sales.`b_id` = $P{Invoiceno}]]>
+     `sales_product` sales_product INNER JOIN `sales` sales ON sales_product.`b_id` = sales.`b_id` WHERE sales.`b_id` = $P{Invoiceno};]]>
 	</queryString>
 	<field name="sales_product_Id" class="java.lang.Integer"/>
 	<field name="sales_product_Barcode" class="java.lang.String"/>
@@ -58,20 +62,6 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sales_cashier}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="2" width="185" height="20" uuid="426a5670-485c-4903-9757-d31af6b81a25"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Shop]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="33" width="185" height="11" uuid="1cd7918b-0332-4184-b81b-cc482a1c3081"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Phone]]></text>
-			</staticText>
 			<textField pattern="yyyy/MM/dd">
 				<reportElement x="14" y="46" width="39" height="10" uuid="f9267421-e21e-455b-8229-01f6b0420ee1"/>
 				<textElement verticalAlignment="Middle">
@@ -101,13 +91,6 @@ FROM
 				<text><![CDATA[Customer :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="22" width="185" height="11" uuid="9feb07c1-c469-4edb-8e14-af43c6d84622"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="6" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Address]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="117" y="46" width="25" height="10" uuid="c5e8c08f-a24c-4f30-b0fa-4b432e45a836"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Trebuchet MS" size="6" isBold="true"/>
@@ -134,6 +117,41 @@ FROM
 					<font fontName="Trebuchet MS" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Return Items]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="2" width="185" height="20" uuid="763dd133-c905-4072-9a7d-11d179567be4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{shopname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="33" width="88" height="11" uuid="adc9e589-bc52-4fc1-9b22-08ab0e22cccf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{phone1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="33" width="87" height="11" uuid="10c66ac7-bafa-4eb9-857f-ca67460c9f18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{phone2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="22" width="183" height="11" uuid="03bfb439-06fb-4c2b-a535-1de6dbd2d39f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="91" y="33" width="5" height="11" uuid="f4257a3f-2798-4d7e-8eab-b34c9eb35c8c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[|]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -231,7 +249,7 @@ FROM
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="91" splitType="Stretch">
+		<band height="92" splitType="Stretch">
 			<staticText>
 				<reportElement x="95" y="46" width="36" height="11" uuid="c7246dc9-be07-4764-90c0-dec3674fb518"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -367,6 +385,9 @@ FROM
 				</textElement>
 				<text><![CDATA[0]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="91" width="185" height="1" uuid="7a2f35ec-73fd-4656-88f1-6e45c0e55f05"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>
