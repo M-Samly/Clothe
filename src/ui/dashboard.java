@@ -9,12 +9,10 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 import javaswingdev.drawer.DrawerController;
@@ -109,6 +107,12 @@ public class dashboard extends javax.swing.JFrame {
                         print();
                     }
                 }))
+                .addChild(createDrawerItem("BackUp", "/img/backup.png", new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        BackupOption();
+                    }
+                }))
                 .addFooter(createDrawerItem("Exit", "/img/power-off.png", new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -116,6 +120,25 @@ public class dashboard extends javax.swing.JFrame {
                     }
                 }))
                 .build();
+
+        shop();
+    }
+
+    public void shop() {
+        String name = "";
+        String jrmxl = "";
+        Connection conn = db.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            String query = "Select name from shop_details where sh_id = 1";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                name = rs.getString("name");
+            }
+            txtShopName.setText("Welcome To " + name);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     private DrawerItem createDrawerItem(String label, String iconPath, ActionListener actionListener) {
@@ -225,6 +248,7 @@ public class dashboard extends javax.swing.JFrame {
         this.dispose();
         login lg = new login();
         lg.setVisible(true);
+        BackUP();
     }
 
     private void print() {
@@ -237,6 +261,7 @@ public class dashboard extends javax.swing.JFrame {
         report();
         income();
         Barcode();
+        BackUP();
         drawer.hide();
     }
 
@@ -537,6 +562,50 @@ public class dashboard extends javax.swing.JFrame {
         }
     }
 
+    public void BackUP() {
+        String dbName = "cloth";
+        String backup = "";
+        Connection conn = db.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            String query = "Select backup from shop_details where sh_id = 1";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                backup = rs.getString("backup");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        String backupPath = backup + "\\backup.sql";
+
+        String command = "C:\\xampp\\mysql\\bin\\mysqldump.exe -uroot --add-drop-database -B " + dbName + " -r " + backupPath;
+
+        Process p = null;
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            p = runtime.exec(command);
+
+            int processComplete = p.waitFor();
+            /*if (processComplete == 0) {
+                JOptionPane.showMessageDialog(this, "Print Successfully.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Can't Print.", "Error", JOptionPane.ERROR_MESSAGE);
+            }*/
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            if (p != null) {
+                p.destroy();
+            }
+        }
+    }
+
+    public void BackupOption() {
+        BackUP();
+        JOptionPane.showMessageDialog(null, "BackUp Successfully Completed!");
+        drawer.hide();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -549,7 +618,7 @@ public class dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         txtUsername = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        txtShopName = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -563,18 +632,18 @@ public class dashboard extends javax.swing.JFrame {
         txtUsername.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         txtUsername.setText("admin");
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Welcome to SHOP");
+        txtShopName.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        txtShopName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtShopName.setText("Welcome to SHOP");
 
         jDesktopPane1.setLayer(txtUsername, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtShopName, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+            .addComponent(txtShopName, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -586,7 +655,7 @@ public class dashboard extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(txtUsername)
                 .addGap(52, 52, 52)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtShopName, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(495, Short.MAX_VALUE))
         );
 
@@ -679,10 +748,10 @@ public class dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel txtShopName;
     public static javax.swing.JLabel txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,6 @@
  */
 package ui;
 
-import code.cashierCode;
 import database.db;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -12,14 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -28,7 +25,6 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import org.springframework.ui.Model;
 
 /**
  *
@@ -730,24 +726,24 @@ public class returnCashier extends javax.swing.JInternalFrame {
                 model.setRowCount(0);
 
             }
- this.dispose();
-                cashier.txtSearchBarcode.requestFocus();
+            this.dispose();
+            cashier.txtSearchBarcode.requestFocus();
 
-                try {
-                    Connection con;
-                    Statement st;
-                    con = db.getConnection();
-                    st = con.createStatement();
-                    String query = "Select b_id from bill_no"; //order by Name";
-                    PreparedStatement pst = con.prepareStatement(query);
-                    ResultSet rs = pst.executeQuery();
-                    while (rs.next()) {
-                        int bill = rs.getInt("b_id");
-                        cashier.txtBillNo.setText(Integer.toString(bill));
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
+            try {
+                Connection con;
+                Statement st;
+                con = db.getConnection();
+                st = con.createStatement();
+                String query = "Select b_id from bill_no"; //order by Name";
+                PreparedStatement pst = con.prepareStatement(query);
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    int bill = rs.getInt("b_id");
+                    cashier.txtBillNo.setText(Integer.toString(bill));
                 }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             txtSearchBarcode.requestFocus();
         }
@@ -974,7 +970,18 @@ public class returnCashier extends javax.swing.JInternalFrame {
             HashMap m = new HashMap();
             m.put("Invoiceno", (bill - 1));
             try {
-                JasperDesign jdesing = JRXmlLoader.load("E:\\M.Samly\\Clothing Management System\\Cloth_System\\src\\print\\returnReciept.jrxml");
+                String jrmxl = "";
+                try {
+                    Statement st = con.createStatement();
+                    String query = "Select jrxml from shop_details where sh_id = 1";
+                    ResultSet rs = st.executeQuery(query);
+                    while (rs.next()) {
+                        jrmxl = rs.getString("jrxml");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+                JasperDesign jdesing = JRXmlLoader.load(jrmxl + "\\returnReciept.jrxml");
                 JasperReport ireport = JasperCompileManager.compileReport(jdesing);
                 JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);
                 //JasperViewer.viewReport(jprint);

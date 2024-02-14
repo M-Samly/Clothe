@@ -306,7 +306,18 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
             HashMap m = new HashMap();
             m.put("barcode", barcode);
             try {
-                JasperDesign jdesing = JRXmlLoader.load("E:\\M.Samly\\Clothing Management System\\Cloth_System\\src\\print\\barcode.jrxml");//("C:\\Users\\msham.DESKTOP-RE7Q19V\\Desktop\\TonyCash\\src\\UI\\report1.jrxml");//
+                String jrmxl = "";
+                try {
+                    Statement st = con.createStatement();
+                    String query = "Select jrxml from shop_details where sh_id = 1";
+                    ResultSet rs = st.executeQuery(query);
+                    while (rs.next()) {
+                        jrmxl = rs.getString("jrxml");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+                JasperDesign jdesing = JRXmlLoader.load(jrmxl + "\\barcode.jrxml");//("C:\\Users\\msham.DESKTOP-RE7Q19V\\Desktop\\TonyCash\\src\\UI\\report1.jrxml");//
                 JasperReport ireport = JasperCompileManager.compileReport(jdesing);
                 JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);
                 //JasperViewer.viewReport(jprint);

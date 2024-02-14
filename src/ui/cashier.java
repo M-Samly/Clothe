@@ -1030,7 +1030,7 @@ public class cashier extends javax.swing.JInternalFrame {
             //String returnBill = txtreturnbill.getText();
 
             float balance = Float.parseFloat(txtBalance.getText());
-            if ( balance < 0) {
+            if (balance < 0) {
                 txtPaymnetType.setText("Loan");
             }
 //            String paymentType = jcomPaymentType.getSelectedItem().toString();
@@ -1494,7 +1494,18 @@ public class cashier extends javax.swing.JInternalFrame {
             HashMap m = new HashMap();
             m.put("Invoiceno", (bill - 1));
             try {
-                JasperDesign jdesing = JRXmlLoader.load("E:\\M.Samly\\Clothing Management System\\Cloth_System\\src\\print\\reciept.jrxml");
+                String jrmxl = "";
+                try {
+                    Statement st = con.createStatement();
+                    String query = "Select jrxml from shop_details where sh_id = 1";
+                    ResultSet rs = st.executeQuery(query);
+                    while (rs.next()) {
+                        jrmxl = rs.getString("jrxml");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+                JasperDesign jdesing = JRXmlLoader.load(jrmxl + "\\reciept.jrxml");
                 JasperReport ireport = JasperCompileManager.compileReport(jdesing);
                 JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);
                 //JasperViewer.viewReport(jprint);
