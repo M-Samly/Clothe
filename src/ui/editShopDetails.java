@@ -253,7 +253,15 @@ public class editShopDetails extends javax.swing.JInternalFrame {
                 pst = con.prepareStatement(query);
                 pst.executeUpdate();
 
+                txtshopname.setText("");
+                txtPhone2.setText("");
+                txtPhone1.setText("");
+                txtAddress.setText("");
+
                 JOptionPane.showMessageDialog(null, "Shop Details Updated!");
+
+                shop_details();
+                txtshopname.requestFocus();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -276,7 +284,15 @@ public class editShopDetails extends javax.swing.JInternalFrame {
             pst = con.prepareStatement(query);
             pst.executeUpdate();
 
+            txtshopname.setText("");
+            txtPhone2.setText("");
+            txtPhone1.setText("");
+            txtAddress.setText("");
+
             JOptionPane.showMessageDialog(null, "Shop Details Updated!");
+
+            shop_details();
+            txtshopname.requestFocus();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
