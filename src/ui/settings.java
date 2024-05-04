@@ -82,6 +82,7 @@ public class settings extends javax.swing.JInternalFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -237,6 +238,14 @@ public class settings extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(jMenu2);
 
+        jMenu1.setText("Shop Details");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -378,6 +387,30 @@ public class settings extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtnewpasswordKeyPressed
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        try {
+            String user = dashboard.txtUsername.getText();
+            Connection con;
+            Statement st;
+            con = db.getConnection();
+            st = con.createStatement();
+            String query = "Select role from user where name = '" + user + "'";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                String role = rs.getString("role");
+                if (role.equals("admin")) {
+                    editShopDetails emp = new editShopDetails();
+                    jDesktopPane1.add(emp).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "You Can't access to the Setting Page");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jMenu1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -387,6 +420,7 @@ public class settings extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
