@@ -42,7 +42,7 @@ public class addemployee extends javax.swing.JInternalFrame {
             Statement st;
             con = db.getConnection();
             st = con.createStatement();
-            String query = "Select * from user order by u_id";
+            String query = "Select * from user order by id";
             ResultSet rs = st.executeQuery(query);
             employeeCode pro;
             while (rs.next()) {
