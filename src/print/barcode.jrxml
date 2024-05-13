@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="97" pageHeight="801" columnWidth="97" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c6a4eda8-2002-43cd-a38e-501f67534910">
-	<property name="ireport.zoom" value="2.143588810000002"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="277" pageHeight="56" columnWidth="277" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c6a4eda8-2002-43cd-a38e-501f67534910">
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="barcode" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="shop" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select * from product where barcode = $P{barcode}]]>
 	</queryString>
@@ -35,57 +36,129 @@
 	</background>
 	<title>
 		<band height="49" splitType="Stretch">
-			<rectangle>
-				<reportElement x="2" y="2" width="93" height="44" uuid="a1bbe079-4f57-468d-b532-075b7dfd67b7"/>
-			</rectangle>
 			<componentElement>
-				<reportElement x="4" y="15" width="89" height="8" uuid="11c59855-d19c-4efb-9c01-6cc65c2b1583"/>
+				<reportElement x="3" y="16" width="89" height="8" uuid="11c59855-d19c-4efb-9c01-6cc65c2b1583"/>
 				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="false" checksumRequired="false">
 					<jr:codeExpression><![CDATA[$F{barcode}]]></jr:codeExpression>
 				</jr:barbecue>
 			</componentElement>
 			<textField>
-				<reportElement x="4" y="23" width="44" height="10" uuid="3b6bb072-cb5c-4928-b20d-9e80d961b061"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="3" y="24" width="44" height="10" uuid="3b6bb072-cb5c-4928-b20d-9e80d961b061"/>
+				<textElement verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="4" y="4" width="89" height="11" uuid="61af700f-cef5-4b7f-a3f7-cfee3b16b3ed"/>
+				<reportElement x="3" y="5" width="89" height="11" uuid="61af700f-cef5-4b7f-a3f7-cfee3b16b3ed"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="4" y="33" width="31" height="10" uuid="43b0fbe0-7b7e-4b20-8b03-d3e62a6ce695"/>
+				<reportElement x="25" y="34" width="31" height="10" uuid="43b0fbe0-7b7e-4b20-8b03-d3e62a6ce695"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rprice}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="35" y="33" width="7" height="10" uuid="29520d8f-bea1-494d-931f-5c0b1fd2e0f6"/>
+				<reportElement x="56" y="34" width="7" height="10" uuid="29520d8f-bea1-494d-931f-5c0b1fd2e0f6"/>
 				<textElement verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[0]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="48" y="23" width="45" height="10" uuid="9906de6a-c073-463e-bedd-7c4f0e982304"/>
+				<reportElement x="148" y="34" width="7" height="10" uuid="ac4c1a97-1dcf-4ce0-ab32-92792178d9fd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="117" y="34" width="31" height="10" uuid="a6a602f6-1442-41ce-9d1a-3b61240e9086"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rprice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="24" width="44" height="10" uuid="20fb6bf5-81a9-48de-b1e2-02b86fdc121d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="95" y="16" width="89" height="8" uuid="aa62a156-6500-486f-945d-559ba3ab886e"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{barcode}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="95" y="5" width="89" height="11" uuid="a56ed926-84f3-4270-805f-84c0fa5628c8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Test Shop]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="48" y="33" width="45" height="10" uuid="b079ef6c-a6ee-4e5d-80e5-933d81e49862"/>
+				<reportElement x="239" y="34" width="7" height="10" uuid="0bcea648-1324-4c97-bd2f-19484affb6d5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="208" y="34" width="31" height="10" uuid="bc03f43b-693a-401b-b2b7-1e6d6b47994f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rprice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="5" width="89" height="11" uuid="2be2ce01-8664-4fb8-a86c-d3638f62a477"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<text><![CDATA[+94 712345678]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="24" width="44" height="10" uuid="a2c650fc-55b8-4a47-844c-29eae952a83c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="186" y="16" width="89" height="8" uuid="b0c994c7-8ee6-4bdb-8ff2-ca27d3e7a2e2"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{barcode}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="47" y="24" width="42" height="10" uuid="ab9210db-f0b5-44c9-b4e2-953a5cfc4226"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{shop}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="24" width="42" height="10" uuid="f22dbf4e-557b-4b89-8842-fb77ad4b5cb8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{shop}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="24" width="42" height="10" uuid="9748fd6e-fff3-49cc-a586-621c4fa123c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{shop}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

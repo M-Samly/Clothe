@@ -459,7 +459,15 @@ public class editProduct extends javax.swing.JInternalFrame {
                                     int qtyupd = Integer.parseInt(txtQtyNew.getText());
                                     int YesORNobarcode = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
                                     if (YesORNobarcode == 0) {
-                                        for (int i = 0; i < qtyupd; i++) {
+                                        int lable_print_final = 0;
+                                        int lable_print = qtyupd / 3;
+                                        int lable_print_remaining = qtyupd % 3;
+                                        if (lable_print_remaining != 0) {
+                                            lable_print_final = lable_print + 1;
+                                        } else {
+                                            lable_print_final = lable_print;
+                                        }
+                                        for (int i = 0; i < lable_print_final; i++) {
                                             BarcodePrint();
                                         }
                                         String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
@@ -518,16 +526,19 @@ public class editProduct extends javax.swing.JInternalFrame {
             m.put("barcode", barcode);
             try {
                 String jrmxl = "";
+                String name = "";
                 try {
                     Statement st = con.createStatement();
-                    String query = "Select jrxml from shop_details where sh_id = 1";
+                    String query = "Select jrxml,name from shop_details where sh_id = 1";
                     ResultSet rs = st.executeQuery(query);
                     while (rs.next()) {
                         jrmxl = rs.getString("jrxml");
+                        name = rs.getString("name");
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
+                m.put("shop", name);
                 JasperDesign jdesing = JRXmlLoader.load(jrmxl + "\\barcode.jrxml");
                 JasperReport ireport = JasperCompileManager.compileReport(jdesing);
                 JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);
@@ -598,7 +609,15 @@ public class editProduct extends javax.swing.JInternalFrame {
                                 int qtyupd = Integer.parseInt(txtQtyNew.getText());
                                 int YesORNobarcode = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
                                 if (YesORNobarcode == 0) {
-                                    for (int i = 0; i < qtyupd; i++) {
+                                    int lable_print_final = 0;
+                                    int lable_print = qtyupd / 3;
+                                    int lable_print_remaining = qtyupd % 3;
+                                    if (lable_print_remaining != 0) {
+                                        lable_print_final = lable_print + 1;
+                                    } else {
+                                        lable_print_final = lable_print;
+                                    }
+                                    for (int i = 0; i < lable_print_final; i++) {
                                         BarcodePrint();
                                     }
                                     String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";

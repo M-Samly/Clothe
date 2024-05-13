@@ -269,7 +269,15 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
             int Qty = Integer.parseInt(txtQty.getText());
             int YesORNo = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
             if (YesORNo == 0) {
-                for (int i = 0; i < Qty; i++) {
+                int lable_print_final = 0;
+                int lable_print = Qty / 3;
+                int lable_print_remaining = Qty % 3;
+                if (lable_print_remaining != 0) {
+                    lable_print_final = lable_print + 1;
+                } else {
+                    lable_print_final = lable_print;
+                }
+                for (int i = 0; i < lable_print_final; i++) {
                     BarcodePrint();
                 }
                 Connection con;
@@ -304,19 +312,22 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
             con = db.getConnection();
             String barcode = txtBarcode.getText();
             HashMap m = new HashMap();
-            m.put("barcode", barcode);
+            m.put("barcode", barcode);            
             try {
                 String jrmxl = "";
+                String name = "";
                 try {
                     Statement st = con.createStatement();
-                    String query = "Select jrxml from shop_details where sh_id = 1";
+                    String query = "Select jrxml,name from shop_details where sh_id = 1";
                     ResultSet rs = st.executeQuery(query);
                     while (rs.next()) {
                         jrmxl = rs.getString("jrxml");
+                        name = rs.getString("name");
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
+                m.put("shop", name);
                 JasperDesign jdesing = JRXmlLoader.load(jrmxl + "\\barcode.jrxml");//("C:\\Users\\msham.DESKTOP-RE7Q19V\\Desktop\\TonyCash\\src\\UI\\report1.jrxml");//
                 JasperReport ireport = JasperCompileManager.compileReport(jdesing);
                 JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);
@@ -457,7 +468,15 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
                 int Qty = Integer.parseInt(txtQty.getText());
                 int YesORNo = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
                 if (YesORNo == 0) {
-                    for (int i = 0; i < Qty; i++) {
+                    int lable_print_final = 0;
+                    int lable_print = Qty / 3;
+                    int lable_print_remaining = Qty % 3;
+                    if (lable_print_remaining != 0) {
+                        lable_print_final = lable_print + 1;
+                    } else {
+                        lable_print_final = lable_print;
+                    }
+                    for (int i = 0; i < lable_print_final; i++) {
                         BarcodePrint();
                     }
                     Connection con;
