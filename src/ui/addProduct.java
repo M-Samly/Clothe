@@ -120,6 +120,11 @@ public class addProduct extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
         txtBarcode.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtBarcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBarcodeActionPerformed(evt);
+            }
+        });
         txtBarcode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBarcodeKeyPressed(evt);
@@ -386,13 +391,16 @@ public class addProduct extends javax.swing.JInternalFrame {
                     txtBarcode.requestFocus();
                 } else {
                     int barcodeLenght = barcode.length();
-                    if (barcodeLenght <= 9) {
+                    if (barcodeLenght <= 6) {
                         String newbarcode = "";
-                        for (int i = 0; i < (9 - barcodeLenght); i++) {
+                        for (int i = 0; i < (6 - barcodeLenght); i++) {
                             newbarcode = newbarcode + 0;
                         }
                         txtBarcode.setText(newbarcode + barcode);
                         txtName.requestFocus();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please Enter 6 Digit Barcode, Maximum barcode 999999", "Invalid Barcode", JOptionPane.ERROR_MESSAGE);
+                        txtBarcode.requestFocus();
                     }
                 }
             } else {
@@ -476,74 +484,78 @@ public class addProduct extends javax.swing.JInternalFrame {
                                             txtName.requestFocus();
                                         } else {
                                             int barcodeLenght = barcode.length();
-                                            if (barcodeLenght < 9) {
+                                            if (barcodeLenght <= 6) {
                                                 String newbarcode = "";
-                                                for (int i = 0; i < (9 - barcodeLenght); i++) {
+                                                for (int i = 0; i < (6 - barcodeLenght); i++) {
                                                     newbarcode = newbarcode + 0;
                                                 }
                                                 txtBarcode.setText(newbarcode + barcode);
-                                            }
-                                            try {
+                                                try {
 
-                                                Connection con;
-                                                PreparedStatement pst, pst1;
-                                                con = db.getConnection();
+                                                    Connection con;
+                                                    PreparedStatement pst, pst1;
+                                                    con = db.getConnection();
 
-                                                String query = "Insert into product (Barcode,Name,Quantity,BPrice,WPrice,RPrice) values (?,?,?,?,?,?)";
-                                                pst = con.prepareStatement(query);
+                                                    String query = "Insert into product (Barcode,Name,Quantity,BPrice,WPrice,RPrice) values (?,?,?,?,?,?)";
+                                                    pst = con.prepareStatement(query);
 
-                                                pst.setString(1, txtBarcode.getText().trim());
-                                                pst.setString(2, txtName.getText().trim());
-                                                int Qty = Integer.parseInt(txtQty.getText().toString().trim());
-                                                pst.setInt(3, Qty);
-                                                float BPrice = Float.parseFloat(txtBPrice.getText().toString().trim());
-                                                pst.setFloat(4, BPrice);
-                                                float WPrice = Float.parseFloat(txtWPrice.getText().toString().trim());
-                                                pst.setFloat(5, WPrice);
-                                                float RPrice = Float.parseFloat(txtRPrice.getText().toString().trim());
-                                                pst.setFloat(6, RPrice);
+                                                    pst.setString(1, txtBarcode.getText().trim());
+                                                    pst.setString(2, txtName.getText().trim());
+                                                    int Qty = Integer.parseInt(txtQty.getText().toString().trim());
+                                                    pst.setInt(3, Qty);
+                                                    float BPrice = Float.parseFloat(txtBPrice.getText().toString().trim());
+                                                    pst.setFloat(4, BPrice);
+                                                    float WPrice = Float.parseFloat(txtWPrice.getText().toString().trim());
+                                                    pst.setFloat(5, WPrice);
+                                                    float RPrice = Float.parseFloat(txtRPrice.getText().toString().trim());
+                                                    pst.setFloat(6, RPrice);
 
-                                                pst.executeUpdate();
-                                                JOptionPane.showMessageDialog(null, "Product Sucessfully Added!");
+                                                    pst.executeUpdate();
+                                                    JOptionPane.showMessageDialog(null, "Product Sucessfully Added!");
 
-                                                int YesORNo = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
-                                                if (YesORNo == 0) {
-                                                    int lable_print_final = 0;
-                                                    int lable_print = Qty / 3;
-                                                    int lable_print_remaining = Qty % 3;
-                                                    if (lable_print_remaining != 0) {
-                                                        lable_print_final = lable_print + 1;
-                                                    } else {
-                                                        lable_print_final = lable_print;
+                                                    int YesORNo = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
+                                                    if (YesORNo == 0) {
+                                                        int lable_print_final = 0;
+                                                        int lable_print = Qty / 3;
+                                                        int lable_print_remaining = Qty % 3;
+                                                        if (lable_print_remaining != 0) {
+                                                            lable_print_final = lable_print + 1;
+                                                        } else {
+                                                            lable_print_final = lable_print;
+                                                        }
+                                                        for (int i = 0; i < lable_print_final; i++) {
+                                                            BarcodePrint();
+                                                        }
+                                                        String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
+                                                        pst1 = con.prepareStatement(query1);
+
+                                                        pst1.setString(1, txtBarcode.getText().trim());
+                                                        pst1.setString(2, txtName.getText().trim());
+                                                        pst1.setInt(3, Qty);
+                                                        pst1.executeUpdate();
                                                     }
-                                                    for (int i = 0; i < lable_print_final; i++) {
-                                                        BarcodePrint();
-                                                    }
-                                                    String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
-                                                    pst1 = con.prepareStatement(query1);
 
-                                                    pst1.setString(1, txtBarcode.getText().trim());
-                                                    pst1.setString(2, txtName.getText().trim());
-                                                    pst1.setInt(3, Qty);
-                                                    pst1.executeUpdate();
+                                                    txtBarcode.setText(null);
+                                                    txtName.setText(null);
+                                                    txtQty.setText("0");
+                                                    txtBPrice.setText("0.00");
+                                                    txtWPrice.setText("0.00");
+                                                    txtRPrice.setText("0.00");
+
+                                                    DefaultTableModel modelpro = (DefaultTableModel) tblProduct.getModel();
+                                                    modelpro.setRowCount(0);
+                                                    show_Product();
+
+                                                    txtBarcode.requestFocus();
+                                                } catch (Exception e) {
+                                                    JOptionPane.showMessageDialog(null, "Alredy Add Product! ,Check The Barcode", "Save Error", JOptionPane.ERROR_MESSAGE);
+                                                    txtBarcode.requestFocus();
                                                 }
-
-                                                txtBarcode.setText(null);
-                                                txtName.setText(null);
-                                                txtQty.setText("0");
-                                                txtBPrice.setText("0.00");
-                                                txtWPrice.setText("0.00");
-                                                txtRPrice.setText("0.00");
-
-                                                DefaultTableModel modelpro = (DefaultTableModel) tblProduct.getModel();
-                                                modelpro.setRowCount(0);
-                                                show_Product();
-
-                                                txtBarcode.requestFocus();
-                                            } catch (Exception e) {
-                                                JOptionPane.showMessageDialog(null, "Alredy Add Product! ,Check The Barcode", "Save Error", JOptionPane.ERROR_MESSAGE);
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "Please Enter 6 Digit Barcode, Maximum barcode 999999", "Invalid Barcode", JOptionPane.ERROR_MESSAGE);
                                                 txtBarcode.requestFocus();
                                             }
+
                                         }
                                     }
                                 } else {
@@ -627,71 +639,75 @@ public class addProduct extends javax.swing.JInternalFrame {
                                         txtName.requestFocus();
                                     } else {
                                         int barcodeLenght = barcode.length();
-                                        if (barcodeLenght < 9) {
+                                        if (barcodeLenght <= 6) {
                                             String newbarcode = "";
-                                            for (int i = 0; i < (9 - barcodeLenght); i++) {
+                                            for (int i = 0; i < (6 - barcodeLenght); i++) {
                                                 newbarcode = newbarcode + 0;
                                             }
                                             txtBarcode.setText(newbarcode + barcode);
-                                        }
-                                        try {
-                                            Connection con;
-                                            PreparedStatement pst, pst1;
-                                            con = db.getConnection();
 
-                                            String query = "Insert into product (Barcode,Name,Quantity,BPrice,WPrice,RPrice) values (?,?,?,?,?,?)";
-                                            pst = con.prepareStatement(query);
+                                            try {
+                                                Connection con;
+                                                PreparedStatement pst, pst1;
+                                                con = db.getConnection();
 
-                                            pst.setString(1, txtBarcode.getText().trim());
-                                            pst.setString(2, txtName.getText().trim());
-                                            int Qty = Integer.parseInt(txtQty.getText().toString().trim());
-                                            pst.setInt(3, Qty);
-                                            float BPrice = Float.parseFloat(txtBPrice.getText().toString().trim());
-                                            pst.setFloat(4, BPrice);
-                                            float WPrice = Float.parseFloat(txtWPrice.getText().toString().trim());
-                                            pst.setFloat(5, WPrice);
-                                            float RPrice = Float.parseFloat(txtRPrice.getText().toString().trim());
-                                            pst.setFloat(6, RPrice);
+                                                String query = "Insert into product (Barcode,Name,Quantity,BPrice,WPrice,RPrice) values (?,?,?,?,?,?)";
+                                                pst = con.prepareStatement(query);
 
-                                            pst.executeUpdate();
-                                            JOptionPane.showMessageDialog(null, "Product Sucessfully Added!");
+                                                pst.setString(1, txtBarcode.getText().trim());
+                                                pst.setString(2, txtName.getText().trim());
+                                                int Qty = Integer.parseInt(txtQty.getText().toString().trim());
+                                                pst.setInt(3, Qty);
+                                                float BPrice = Float.parseFloat(txtBPrice.getText().toString().trim());
+                                                pst.setFloat(4, BPrice);
+                                                float WPrice = Float.parseFloat(txtWPrice.getText().toString().trim());
+                                                pst.setFloat(5, WPrice);
+                                                float RPrice = Float.parseFloat(txtRPrice.getText().toString().trim());
+                                                pst.setFloat(6, RPrice);
 
-                                            int YesORNo = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
-                                            if (YesORNo == 0) {
-                                                int lable_print_final = 0;
-                                                int lable_print = Qty / 3;
-                                                int lable_print_remaining = Qty % 3;
-                                                if (lable_print_remaining != 0) {
-                                                    lable_print_final = lable_print + 1;
-                                                } else {
-                                                    lable_print_final = lable_print;
+                                                pst.executeUpdate();
+                                                JOptionPane.showMessageDialog(null, "Product Sucessfully Added!");
+
+                                                int YesORNo = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
+                                                if (YesORNo == 0) {
+                                                    int lable_print_final = 0;
+                                                    int lable_print = Qty / 3;
+                                                    int lable_print_remaining = Qty % 3;
+                                                    if (lable_print_remaining != 0) {
+                                                        lable_print_final = lable_print + 1;
+                                                    } else {
+                                                        lable_print_final = lable_print;
+                                                    }
+                                                    for (int i = 0; i < lable_print_final; i++) {
+                                                        BarcodePrint();
+                                                    }
+                                                    String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
+                                                    pst1 = con.prepareStatement(query1);
+
+                                                    pst1.setString(1, txtBarcode.getText().trim());
+                                                    pst1.setString(2, txtName.getText().trim());
+                                                    pst1.setInt(3, Qty);
+                                                    pst1.executeUpdate();
                                                 }
-                                                for (int i = 0; i < lable_print_final; i++) {
-                                                    BarcodePrint();
-                                                }
-                                                String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
-                                                pst1 = con.prepareStatement(query1);
 
-                                                pst1.setString(1, txtBarcode.getText().trim());
-                                                pst1.setString(2, txtName.getText().trim());
-                                                pst1.setInt(3, Qty);
-                                                pst1.executeUpdate();
+                                                txtBarcode.setText(null);
+                                                txtName.setText(null);
+                                                txtQty.setText("0");
+                                                txtBPrice.setText("0.00");
+                                                txtWPrice.setText("0.00");
+                                                txtRPrice.setText("0.00");
+
+                                                DefaultTableModel modelpro = (DefaultTableModel) tblProduct.getModel();
+                                                modelpro.setRowCount(0);
+                                                show_Product();
+
+                                                txtBarcode.requestFocus();
+                                            } catch (Exception e) {
+                                                JOptionPane.showMessageDialog(null, "Alredy Add Product! ,Check The Product", "Save Error", JOptionPane.ERROR_MESSAGE);
+                                                txtBarcode.requestFocus();
                                             }
-
-                                            txtBarcode.setText(null);
-                                            txtName.setText(null);
-                                            txtQty.setText("0");
-                                            txtBPrice.setText("0.00");
-                                            txtWPrice.setText("0.00");
-                                            txtRPrice.setText("0.00");
-
-                                            DefaultTableModel modelpro = (DefaultTableModel) tblProduct.getModel();
-                                            modelpro.setRowCount(0);
-                                            show_Product();
-
-                                            txtBarcode.requestFocus();
-                                        } catch (Exception e) {
-                                            JOptionPane.showMessageDialog(null, "Alredy Add Product! ,Check The Product", "Save Error", JOptionPane.ERROR_MESSAGE);
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "Please Enter 6 Digit Barcode, Maximum barcode 999999", "Invalid Barcode", JOptionPane.ERROR_MESSAGE);
                                             txtBarcode.requestFocus();
                                         }
                                     }
@@ -884,6 +900,10 @@ public class addProduct extends javax.swing.JInternalFrame {
             txtQty.requestFocus();
         }
     }//GEN-LAST:event_tblProductKeyPressed
+
+    private void txtBarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBarcodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBarcodeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
