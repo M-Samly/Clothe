@@ -286,6 +286,8 @@ public class searchName extends javax.swing.JInternalFrame {
         boolean status = false;
         int rowNumber = 0;
         int j = 0;
+                float cost = 0;
+            float bprice = 0;
 
         String type = cashier.txtType.getText();
 
@@ -295,17 +297,19 @@ public class searchName extends javax.swing.JInternalFrame {
             con = db.getConnection();
             st = con.createStatement();
 
-            String query = "Select barcode,name,rprice,wprice From product where barcode = '" + txtSearchBarcode.getText() + "'";
+            String query = "Select barcode,name,bprice,rprice,wprice From product where barcode = '" + txtSearchBarcode.getText() + "'";
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 barcode = rs.getString("barcode");
                 name = rs.getString("name");
+                    bprice = rs.getFloat("bprice");
                 if (type == "Retail") {
                     rprice = rs.getFloat("rprice");
                 } else {
                     rprice = rs.getFloat("wprice");
                 }
+                    cost = rprice - bprice;
                 String searchBarcode = txtSearchBarcode.getText();
                 if (searchBarcode.equals(barcode)) {
                     sameProduct = true;
@@ -320,6 +324,7 @@ public class searchName extends javax.swing.JInternalFrame {
                     model.addRow(new Object[]{
                         barcode,
                         name,
+                        cost,
                         rprice,
                         1,
                         0.00,
@@ -334,9 +339,9 @@ public class searchName extends javax.swing.JInternalFrame {
                         }
                     }
                     if (status == true) {
-                        int qunatity = Integer.parseInt(model.getValueAt(rowNumber, 3).toString()) + 1;
-                        model.setValueAt(qunatity, rowNumber, 3);
-                        float price = Float.parseFloat(model.getValueAt(rowNumber, 5).toString()) + rprice;
+                        int qunatity = Integer.parseInt(model.getValueAt(rowNumber, 4).toString()) + 1;
+                        model.setValueAt(qunatity, rowNumber, 4);
+                        float price = Float.parseFloat(model.getValueAt(rowNumber, 6).toString()) + rprice;
                         model.setValueAt(price, rowNumber, 5);
 
                         status = false;
@@ -345,6 +350,7 @@ public class searchName extends javax.swing.JInternalFrame {
                         model.addRow(new Object[]{
                             barcode,
                             name,
+                            cost,
                             rprice,
                             1,
                             0.00,
@@ -371,8 +377,8 @@ public class searchName extends javax.swing.JInternalFrame {
             float sum = 0;
             float discounttot = 0;
             for (int i = 0; i < cashier.tblBill.getRowCount(); i++) {
-                discounttot = discounttot + Float.parseFloat(cashier.tblBill.getValueAt(i, 4).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
-                sum = sum + Float.parseFloat(cashier.tblBill.getValueAt(i, 5).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
+                discounttot = discounttot + Float.parseFloat(cashier.tblBill.getValueAt(i, 5).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
+                sum = sum + Float.parseFloat(cashier.tblBill.getValueAt(i, 6).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
                 j = i + 1;
             }
             float returnamount = Float.parseFloat(cashier.txtReturn.getText());

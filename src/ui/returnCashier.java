@@ -828,6 +828,9 @@ public class returnCashier extends javax.swing.JInternalFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
+        reBill rbill = new reBill();
+        jDesktopPane1.add(rbill).setVisible(true);
+        rbill.txtsearchbybillno.requestFocus();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

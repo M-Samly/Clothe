@@ -89,6 +89,7 @@ public class product extends javax.swing.JInternalFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -224,6 +225,14 @@ public class product extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(jMenu4);
 
+        jMenu6.setText("Product Cost");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu6);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -334,6 +343,30 @@ public class product extends javax.swing.JInternalFrame {
         jDesktopPane1.add(barpro).setVisible(true);
     }//GEN-LAST:event_jMenu5MouseClicked
 
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        // TODO add your handling code here:
+        try {
+            String user = dashboard.txtUsername.getText();
+            Connection con;
+            Statement st;
+            con = db.getConnection();
+            st = con.createStatement();
+            String query = "Select role from user where name = '" + user + "'";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                String role = rs.getString("role");
+                if (role.equals("admin")) {
+                    costProduct costpro = new costProduct();
+                    jDesktopPane1.add(costpro).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "You Can't access to the Product Page");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jMenu6MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel2;
@@ -342,6 +375,7 @@ public class product extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

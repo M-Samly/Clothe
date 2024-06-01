@@ -120,6 +120,8 @@ public class cashier extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -165,11 +167,11 @@ public class cashier extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Barcode", "Name", "Price", "Quantity", "Discount", "Total"
+                "Barcode", "Name", "", "Price", "Quantity", "Discount", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -195,6 +197,7 @@ public class cashier extends javax.swing.JInternalFrame {
             tblBill.getColumnModel().getColumn(3).setResizable(false);
             tblBill.getColumnModel().getColumn(4).setResizable(false);
             tblBill.getColumnModel().getColumn(5).setResizable(false);
+            tblBill.getColumnModel().getColumn(6).setResizable(false);
         }
 
         txtCustomer.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -478,50 +481,28 @@ public class cashier extends javax.swing.JInternalFrame {
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("F7 - Search");
 
+        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/new-product.png"))); // NOI18N
+        jButton12.setText("Open");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        jButton13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/expenses.png"))); // NOI18N
+        jButton13.setText("Expense");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(281, 281, 281)
-                                .addComponent(jButton7)
-                                .addGap(6, 6, 6)
-                                .addComponent(jButton8)
-                                .addGap(6, 6, 6)
-                                .addComponent(jButton9))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(38, 38, 38)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
-                .addContainerGap(10, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,7 +539,47 @@ public class cashier extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(54, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(18, 18, 18))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(281, 281, 281)
+                        .addComponent(jButton7)
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton8)
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton9))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,23 +615,6 @@ public class cashier extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnType, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(220, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -626,7 +630,28 @@ public class cashier extends javax.swing.JInternalFrame {
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15))))
+                        .addGap(15, 15, 15))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnType, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(139, Short.MAX_VALUE))))
         );
 
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -885,6 +910,8 @@ public class cashier extends javax.swing.JInternalFrame {
             boolean status = false;
             int rowNumber = 0;
             int j = 0;
+            float cost = 0;
+            float bprice = 0;
 
             String type = txtType.getText();
 
@@ -894,17 +921,19 @@ public class cashier extends javax.swing.JInternalFrame {
                 con = db.getConnection();
                 st = con.createStatement();
 
-                String query = "Select barcode,name,rprice,wprice From product where barcode = '" + txtSearchBarcode.getText() + "'";
+                String query = "Select barcode,name,bprice,rprice,wprice From product where barcode = '" + txtSearchBarcode.getText() + "'";
                 PreparedStatement pst = con.prepareStatement(query);
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
                     barcode = rs.getString("barcode");
                     name = rs.getString("name");
+                    bprice = rs.getFloat("bprice");
                     if (type == "Retail") {
                         rprice = rs.getFloat("rprice");
                     } else {
                         rprice = rs.getFloat("wprice");
                     }
+                    cost = rprice - bprice;
                     String searchBarcode = txtSearchBarcode.getText();
                     if (searchBarcode.equals(barcode)) {
                         sameProduct = true;
@@ -919,6 +948,7 @@ public class cashier extends javax.swing.JInternalFrame {
                         model.addRow(new Object[]{
                             barcode,
                             name,
+                            cost,
                             rprice,
                             1,
                             0.00,
@@ -933,10 +963,10 @@ public class cashier extends javax.swing.JInternalFrame {
                             }
                         }
                         if (status == true) {
-                            int qunatity = Integer.parseInt(model.getValueAt(rowNumber, 3).toString()) + 1;
-                            model.setValueAt(qunatity, rowNumber, 3);
-                            float price = Float.parseFloat(model.getValueAt(rowNumber, 5).toString()) + rprice;
-                            model.setValueAt(price, rowNumber, 5);
+                            int qunatity = Integer.parseInt(model.getValueAt(rowNumber, 4).toString()) + 1;
+                            model.setValueAt(qunatity, rowNumber, 4);
+                            float price = Float.parseFloat(model.getValueAt(rowNumber, 6).toString()) + rprice;
+                            model.setValueAt(price, rowNumber, 6);
 
                             status = false;
                             rowNumber = 0;
@@ -944,6 +974,7 @@ public class cashier extends javax.swing.JInternalFrame {
                             model.addRow(new Object[]{
                                 barcode,
                                 name,
+                                cost,
                                 rprice,
                                 1,
                                 0.00,
@@ -971,9 +1002,9 @@ public class cashier extends javax.swing.JInternalFrame {
                 float discounttot = 0;
                 int item = 0;
                 for (int i = 0; i < tblBill.getRowCount(); i++) {
-                    discounttot = discounttot + Float.parseFloat(tblBill.getValueAt(i, 4).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
-                    sum = sum + Float.parseFloat(tblBill.getValueAt(i, 5).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
-                    item = Integer.parseInt(tblBill.getValueAt(i, 3).toString());
+                    discounttot = discounttot + Float.parseFloat(tblBill.getValueAt(i, 5).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
+                    sum = sum + Float.parseFloat(tblBill.getValueAt(i, 6).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
+                    item = Integer.parseInt(tblBill.getValueAt(i, 4).toString());
                     j = j + item;
                 }
                 float returnamount = Float.parseFloat(txtReturn.getText());
@@ -1130,9 +1161,9 @@ public class cashier extends javax.swing.JInternalFrame {
             float discounttot = 0;
             int item = 0;
             for (int i = 0; i < tblBill.getRowCount(); i++) {
-                discounttot = discounttot + Float.parseFloat(tblBill.getValueAt(i, 4).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
-                sum = sum + Float.parseFloat(tblBill.getValueAt(i, 5).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
-                item = Integer.parseInt(tblBill.getValueAt(i, 3).toString());
+                discounttot = discounttot + Float.parseFloat(tblBill.getValueAt(i, 5).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
+                sum = sum + Float.parseFloat(tblBill.getValueAt(i, 6).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
+                item = Integer.parseInt(tblBill.getValueAt(i, 4).toString());
                 j = j + item;
             }
             float returnamount = Float.parseFloat(txtReturn.getText());
@@ -1148,10 +1179,10 @@ public class cashier extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel) tblBill.getModel();
             editCashier.txtBarcode.setText(model.getValueAt(i, 0).toString());
             editCashier.txtName.setText(model.getValueAt(i, 1).toString());
-            editCashier.txtPrice.setText(model.getValueAt(i, 2).toString());
-            editCashier.txtQuantity.setText(model.getValueAt(i, 3).toString());
-            editCashier.txtDiscount.setText(model.getValueAt(i, 4).toString());
-            editCashier.txtTotal.setText(model.getValueAt(i, 5).toString());
+            editCashier.txtPrice.setText(model.getValueAt(i, 3).toString());
+            editCashier.txtQuantity.setText(model.getValueAt(i, 4).toString());
+            editCashier.txtDiscount.setText(model.getValueAt(i, 5).toString());
+            editCashier.txtTotal.setText(model.getValueAt(i, 6).toString());
             jDesktopPane1.add(edtCash).setVisible(true);
             editCashier.txtQuantity.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_D) {
@@ -1160,10 +1191,10 @@ public class cashier extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel) tblBill.getModel();
             discountCashier.txtBarcode.setText(model.getValueAt(i, 0).toString());
             discountCashier.txtName.setText(model.getValueAt(i, 1).toString());
-            discountCashier.txtPrice.setText(model.getValueAt(i, 2).toString());
-            discountCashier.txtQuantity.setText(model.getValueAt(i, 3).toString());
-            discountCashier.txtDiscount.setText(model.getValueAt(i, 4).toString());
-            discountCashier.txtTotal.setText(model.getValueAt(i, 5).toString());
+            discountCashier.txtPrice.setText(model.getValueAt(i, 3).toString());
+            discountCashier.txtQuantity.setText(model.getValueAt(i, 4).toString());
+            discountCashier.txtDiscount.setText(model.getValueAt(i, 5).toString());
+            discountCashier.txtTotal.setText(model.getValueAt(i, 6).toString());
             jDesktopPane1.add(disCashi).setVisible(true);
             discountCashier.txtDiscount.requestFocus();
         }
@@ -1301,9 +1332,9 @@ public class cashier extends javax.swing.JInternalFrame {
                 float discounttot = 0;
                 int item = 0;
                 for (int i = 0; i < tblBill.getRowCount(); i++) {
-                    discounttot = discounttot + Float.parseFloat(tblBill.getValueAt(i, 4).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
-                    sum = sum + Float.parseFloat(tblBill.getValueAt(i, 5).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
-                    item = Integer.parseInt(tblBill.getValueAt(i, 3).toString());
+                    discounttot = discounttot + Float.parseFloat(tblBill.getValueAt(i, 5).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
+                    sum = sum + Float.parseFloat(tblBill.getValueAt(i, 6).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
+                    item = Integer.parseInt(tblBill.getValueAt(i, 4).toString());
                     j = j + item;
                 }
                 float returnamount = Float.parseFloat(txtReturn.getText());
@@ -1339,6 +1370,22 @@ public class cashier extends javax.swing.JInternalFrame {
         txtPayment.setText(txtTotalAmount.getText());
         txtPayment.requestFocus();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        openItem op = new openItem();
+        jDesktopPane1.add(op).setVisible(true);
+        op.txtName.requestFocus();
+
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        
+        expence ex = new expence();
+        jDesktopPane1.add(ex).setVisible(true);
+        ex.txtDetails.requestFocus();
+    }//GEN-LAST:event_jButton13ActionPerformed
 
     public void sales() {
 
@@ -1388,10 +1435,10 @@ public class cashier extends javax.swing.JInternalFrame {
                     for (int i = 0; i < tblBill.getRowCount(); i++) {
                         barcode = (String) tblBill.getValueAt(i, 0);
                         iName = (String) tblBill.getValueAt(i, 1);
-                        iprice = (Float.parseFloat(tblBill.getValueAt(i, 2).toString()));
-                        iqty = (Float.parseFloat(tblBill.getValueAt(i, 3).toString()));
-                        iDis = (Float.parseFloat(tblBill.getValueAt(i, 4).toString()));
-                        iTotal = (Float.parseFloat(tblBill.getValueAt(i, 5).toString()));
+                        iprice = (Float.parseFloat(tblBill.getValueAt(i, 3).toString()));
+                        iqty = (Float.parseFloat(tblBill.getValueAt(i, 4).toString()));
+                        iDis = (Float.parseFloat(tblBill.getValueAt(i, 5).toString()));
+                        iTotal = (Float.parseFloat(tblBill.getValueAt(i, 6).toString()));
 
                         pst1.setInt(1, billNo);
                         pst1.setString(2, barcode);
@@ -1539,6 +1586,8 @@ public class cashier extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

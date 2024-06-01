@@ -210,16 +210,16 @@ public class editCashier extends javax.swing.JInternalFrame {
             int qty = Integer.parseInt(txtQuantity.getText());
             String total = txtTotal.getText();
 
-            modal.setValueAt(qty, j, 3);
-            modal.setValueAt(total, j, 5);
+            modal.setValueAt(qty, j, 4);
+            modal.setValueAt(total, j, 6);
 
             float sum = 0;
             float discounttot = 0;
             int item = 0;
             for (int i = 0; i < cashier.tblBill.getRowCount(); i++) {
-                discounttot = discounttot + Float.parseFloat(cashier.tblBill.getValueAt(i, 4).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
-                sum = sum + Float.parseFloat(cashier.tblBill.getValueAt(i, 5).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
-                item = Integer.parseInt(cashier.tblBill.getValueAt(i, 3).toString());
+                discounttot = discounttot + Float.parseFloat(cashier.tblBill.getValueAt(i, 5).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
+                sum = sum + Float.parseFloat(cashier.tblBill.getValueAt(i, 6).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
+                item = Integer.parseInt(cashier.tblBill.getValueAt(i, 4).toString());
                 j = j + item;
             }
             float returnamount = Float.parseFloat(cashier.txtReturn.getText());

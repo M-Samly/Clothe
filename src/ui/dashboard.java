@@ -202,7 +202,7 @@ public class dashboard extends javax.swing.JFrame {
             while (rs.next()) {
                 String role = rs.getString("role");
                 if (role.equals("admin")) {
-                    report rp = new report();
+                    fullreport rp = new fullreport();
                     jDesktopPane1.add(rp).setVisible(true);
                     drawer.hide();
                 } else {

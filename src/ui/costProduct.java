@@ -8,36 +8,25 @@ import code.productCode;
 import database.db;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author M_Samly
  */
-public class barcodeProduct extends javax.swing.JInternalFrame {
+public class costProduct extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form addProduct
      */
-    public barcodeProduct() {
+    public costProduct() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
@@ -70,13 +59,20 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
         ArrayList<productCode> list = ProductList();
         DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
         Object[] row = new Object[6];
+        int qty = 0;
+        float cost = 0;
         for (int i = 0; i < list.size(); i++) {
             row[0] = list.get(i).getBarcode();
             row[1] = list.get(i).getName();
             row[2] = list.get(i).getQty();
-            row[3] = list.get(i).getRprice();
+            row[3] = list.get(i).getBprice();
             model.addRow(row);
+            qty = qty + list.get(i).getQty();
+            cost = cost + list.get(i).getBprice();
         }
+        txtQuantity.setText(Integer.toString(qty));
+        float total = qty * cost;
+        txtTotalCost.setText(String.valueOf(new DecimalFormat("0.00").format(total)));
     }
 
     /**
@@ -89,16 +85,16 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
         txtSearchBarcode = new javax.swing.JTextField();
         txtSerchName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtQty = new javax.swing.JTextField();
-        txtName = new javax.swing.JLabel();
-        txtBarcode = new javax.swing.JLabel();
+        txtQuantity = new javax.swing.JLabel();
+        txtTotalCost = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -107,20 +103,12 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
-        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSave.setText("Print");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Barcode", "Name", "Quantity", "R Price"
+                "Barcode", "Name", "Quantity", "B Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -173,76 +161,71 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Search By Barcode");
 
-        txtQty.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtQty.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtQty.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQtyActionPerformed(evt);
-            }
-        });
-        txtQty.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtQtyKeyPressed(evt);
-            }
-        });
+        txtQuantity.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtQuantity.setText("0");
 
-        txtName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTotalCost.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTotalCost.setText("0");
 
-        txtBarcode.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtBarcode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Total Quantity");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("Total Cost");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtQty)
-                            .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)))
-                    .addComponent(txtBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSerchName)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtSearchBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(9, 9, 9))
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtSerchName)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSearchBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                    .addComponent(txtTotalCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(87, 87, 87))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearchBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSerchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
-                        .addGap(64, 64, 64))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtQuantity)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTotalCost))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel9))
                         .addGap(18, 18, 18)
-                        .addComponent(btnSave)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSearchBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSerchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,84 +243,6 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        try {
-            int Qty = Integer.parseInt(txtQty.getText());
-            int YesORNo = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
-            if (YesORNo == 0) {
-                int lable_print_final = 0;
-                int lable_print = Qty / 3;
-                int lable_print_remaining = Qty % 3;
-                if (lable_print_remaining != 0) {
-                    lable_print_final = lable_print + 1;
-                } else {
-                    lable_print_final = lable_print;
-                }
-                for (int i = 0; i < lable_print_final; i++) {
-                    BarcodePrint();
-                }
-                Connection con;
-                PreparedStatement pst1;
-                con = db.getConnection();
-
-                String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
-                pst1 = con.prepareStatement(query1);
-
-                pst1.setString(1, txtBarcode.getText().trim());
-                pst1.setString(2, txtName.getText().trim());
-                pst1.setInt(3, Qty);
-                pst1.executeUpdate();
-
-                txtBarcode.setText(null);
-                txtName.setText(null);
-                txtQty.setText(null);
-                txtSerchName.setText(null);
-                txtSearchBarcode.setText(null);
-                txtSerchName.requestFocus();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);//"Alredy Add Product! ,Check The Product", "Save Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    public void BarcodePrint() {
-
-        try {
-            Connection con;
-            PreparedStatement pst, pst1, pst2, pst3, pst4, pst5;
-            con = db.getConnection();
-            String barcode = txtBarcode.getText();
-            HashMap m = new HashMap();
-            m.put("barcode", barcode);            
-            try {
-                String jrmxl = "";
-                String name = "";
-                try {
-                    Statement st = con.createStatement();
-                    String query = "Select jrxml,name from shop_details where sh_id = 1";
-                    ResultSet rs = st.executeQuery(query);
-                    while (rs.next()) {
-                        jrmxl = rs.getString("jrxml");
-                        name = rs.getString("name");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
-                m.put("shop", name);
-                JasperDesign jdesing = JRXmlLoader.load(jrmxl + "\\barcode.jrxml");//("C:\\Users\\msham.DESKTOP-RE7Q19V\\Desktop\\TonyCash\\src\\UI\\report1.jrxml");//
-                JasperReport ireport = JasperCompileManager.compileReport(jdesing);
-                JasperPrint jprint = JasperFillManager.fillReport(ireport, m, con);
-                //JasperViewer.viewReport(jprint);
-                JasperPrintManager.printReport(jprint, false);
-            } catch (JRException ex) {
-                Logger.getLogger(barcodeProduct.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
 
     private void txtSerchNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSerchNameKeyReleased
         // TODO add your handling code here:
@@ -360,14 +265,20 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
             model.setRowCount(0);
             Object[] row = new Object[6];
+            int qty = 0;
+            float cost = 0;
             for (int i = 0; i < al.size(); i++) {
                 row[0] = al.get(i).getBarcode();
                 row[1] = al.get(i).getName();
                 row[2] = al.get(i).getQty();
-                row[4] = al.get(i).getWprice();
-                row[5] = al.get(i).getRprice();
+                row[3] = al.get(i).getBprice();
                 model.addRow(row);
+                qty = qty + al.get(i).getQty();
+                cost = cost + al.get(i).getBprice();
             }
+            txtQuantity.setText(Integer.toString(qty));
+            float total = qty * cost;
+            txtTotalCost.setText(String.valueOf(new DecimalFormat("0.00").format(total)));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cannot find Product Name", "Search Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -394,14 +305,20 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
             model.setRowCount(0);
             Object[] row = new Object[6];
+            int qty = 0;
+            float cost = 0;
             for (int i = 0; i < al.size(); i++) {
                 row[0] = al.get(i).getBarcode();
                 row[1] = al.get(i).getName();
                 row[2] = al.get(i).getQty();
-                row[4] = al.get(i).getWprice();
-                row[5] = al.get(i).getRprice();
+                row[3] = al.get(i).getBprice();
                 model.addRow(row);
+                qty = qty + al.get(i).getQty();
+                cost = cost + al.get(i).getBprice();
             }
+            txtQuantity.setText(Integer.toString(qty));
+            float total = qty * cost;
+            txtTotalCost.setText(String.valueOf(new DecimalFormat("0.00").format(total)));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cannot find Product Barcode", "Search Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -411,18 +328,18 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int i = tblProduct.getSelectedRow();
         TableModel model = tblProduct.getModel();
-        txtBarcode.setText(model.getValueAt(i, 0).toString());
+        /*  txtBarcode.setText(model.getValueAt(i, 0).toString());
         txtName.setText(model.getValueAt(i, 1).toString());
-        txtQty.requestFocus();
+        txtQty.requestFocus();*/
     }//GEN-LAST:event_tblProductMouseClicked
 
     private void tblProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblProductKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
             int i = tblProduct.getSelectedRow();
-            TableModel model = tblProduct.getModel();
+            /*TableModel model = tblProduct.getModel();
             txtBarcode.setText(model.getValueAt(i, 0).toString());
-            txtName.setText(model.getValueAt(i, 1).toString());
+            txtName.setText(model.getValueAt(i, 1).toString());*/
         }
     }//GEN-LAST:event_tblProductKeyReleased
 
@@ -447,71 +364,24 @@ public class barcodeProduct extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             int i = tblProduct.getSelectedRow();
             TableModel model = tblProduct.getModel();
-            txtBarcode.setText(model.getValueAt(i, 0).toString());
+            /*            txtBarcode.setText(model.getValueAt(i, 0).toString());
             txtName.setText(model.getValueAt(i, 1).toString());
-            txtQty.requestFocus();
+            txtQty.requestFocus();*/
         }
     }//GEN-LAST:event_tblProductKeyPressed
 
-    private void txtQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQtyActionPerformed
-
-    private void txtQtyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtyKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            try {
-                int Qty = Integer.parseInt(txtQty.getText());
-                int YesORNo = JOptionPane.showConfirmDialog(null, "Are you ready for print barcodes?", "Barcode Print", JOptionPane.YES_NO_OPTION);
-                if (YesORNo == 0) {
-                    int lable_print_final = 0;
-                    int lable_print = Qty / 3;
-                    int lable_print_remaining = Qty % 3;
-                    if (lable_print_remaining != 0) {
-                        lable_print_final = lable_print + 1;
-                    } else {
-                        lable_print_final = lable_print;
-                    }
-                    for (int i = 0; i < lable_print_final; i++) {
-                        BarcodePrint();
-                    }
-                    Connection con;
-                    PreparedStatement pst1;
-                    con = db.getConnection();
-
-                    String query1 = "Insert into barcode_print (date,time,Barcode,Name,Qty) values (CURDATE(),CURTIME(),?,?,?)";
-                    pst1 = con.prepareStatement(query1);
-
-                    pst1.setString(1, txtBarcode.getText().trim());
-                    pst1.setString(2, txtName.getText().trim());
-                    pst1.setInt(3, Qty);
-                    pst1.executeUpdate();
-
-                    txtBarcode.setText(null);
-                    txtName.setText(null);
-                    txtQty.setText(null);
-                    txtSerchName.setText(null);
-                    txtSearchBarcode.setText(null);
-                    txtSerchName.requestFocus();
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);//"Alredy Add Product! ,Check The Product", "Save Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_txtQtyKeyPressed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSave;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProduct;
-    private javax.swing.JLabel txtBarcode;
-    private javax.swing.JLabel txtName;
-    private javax.swing.JTextField txtQty;
+    private javax.swing.JLabel txtQuantity;
     private javax.swing.JTextField txtSearchBarcode;
     private javax.swing.JTextField txtSerchName;
+    private javax.swing.JLabel txtTotalCost;
     // End of variables declaration//GEN-END:variables
 }
