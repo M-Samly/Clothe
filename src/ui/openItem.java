@@ -214,7 +214,7 @@ public class openItem extends javax.swing.JInternalFrame {
                 0.00,
                 total,}
             );
-            
+
             float sum = 0;
             float discounttot = 0;
             int item = 0;
@@ -254,10 +254,10 @@ public class openItem extends javax.swing.JInternalFrame {
             cashier.txtItem.setText(Integer.toString(j));
             cashier.txtTotalAmount.setText(String.valueOf(new DecimalFormat("0.00").format(finalsum)));
             cashier.txtTotalDiscount.setText(String.valueOf(new DecimalFormat("0.00").format(discounttot)));
-            */
+             */
             this.dispose();
             cashier.txtSearchBarcode.requestFocus();
-             
+
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             cashier.txtSearchBarcode.requestFocus();
         }
@@ -281,6 +281,8 @@ public class openItem extends javax.swing.JInternalFrame {
     private void txtNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String capital_name = txtName.getText().substring(0, 1).toUpperCase() + txtName.getText().substring(1);
+            txtName.setText(capital_name);
             txtPrice.requestFocus();
         }
     }//GEN-LAST:event_txtNameKeyPressed

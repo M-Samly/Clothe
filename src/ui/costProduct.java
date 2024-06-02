@@ -59,20 +59,32 @@ public class costProduct extends javax.swing.JInternalFrame {
         ArrayList<productCode> list = ProductList();
         DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
         Object[] row = new Object[6];
-        int qty = 0;
-        float cost = 0;
         for (int i = 0; i < list.size(); i++) {
             row[0] = list.get(i).getBarcode();
             row[1] = list.get(i).getName();
             row[2] = list.get(i).getQty();
             row[3] = list.get(i).getBprice();
             model.addRow(row);
-            qty = qty + list.get(i).getQty();
-            cost = cost + list.get(i).getBprice();
         }
-        txtQuantity.setText(Integer.toString(qty));
-        float total = qty * cost;
-        txtTotalCost.setText(String.valueOf(new DecimalFormat("0.00").format(total)));
+        costPro();
+    }
+
+    public void costPro() {
+        int qty = 0;
+        float cost = 0;
+        float total = 0;
+        int allqty = 0;
+        float fulltotal = 0;
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            qty = Integer.parseInt(tblProduct.getValueAt(i, 2).toString());
+            cost = Float.parseFloat(tblProduct.getValueAt(i, 3).toString());
+            total = qty * cost;
+            allqty = allqty + qty;
+            fulltotal = fulltotal + total;
+        }
+        txtQuantity.setText(Integer.toString(allqty));
+        txtTotalCost.setText(String.valueOf(new DecimalFormat("0.00").format(fulltotal)));
     }
 
     /**
@@ -265,20 +277,14 @@ public class costProduct extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
             model.setRowCount(0);
             Object[] row = new Object[6];
-            int qty = 0;
-            float cost = 0;
             for (int i = 0; i < al.size(); i++) {
                 row[0] = al.get(i).getBarcode();
                 row[1] = al.get(i).getName();
                 row[2] = al.get(i).getQty();
                 row[3] = al.get(i).getBprice();
                 model.addRow(row);
-                qty = qty + al.get(i).getQty();
-                cost = cost + al.get(i).getBprice();
             }
-            txtQuantity.setText(Integer.toString(qty));
-            float total = qty * cost;
-            txtTotalCost.setText(String.valueOf(new DecimalFormat("0.00").format(total)));
+            costPro();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cannot find Product Name", "Search Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -305,20 +311,14 @@ public class costProduct extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
             model.setRowCount(0);
             Object[] row = new Object[6];
-            int qty = 0;
-            float cost = 0;
             for (int i = 0; i < al.size(); i++) {
                 row[0] = al.get(i).getBarcode();
                 row[1] = al.get(i).getName();
                 row[2] = al.get(i).getQty();
                 row[3] = al.get(i).getBprice();
                 model.addRow(row);
-                qty = qty + al.get(i).getQty();
-                cost = cost + al.get(i).getBprice();
             }
-            txtQuantity.setText(Integer.toString(qty));
-            float total = qty * cost;
-            txtTotalCost.setText(String.valueOf(new DecimalFormat("0.00").format(total)));
+            costPro();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cannot find Product Barcode", "Search Error", JOptionPane.ERROR_MESSAGE);
         }
