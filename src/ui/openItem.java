@@ -206,7 +206,7 @@ public class openItem extends javax.swing.JInternalFrame {
             float total = Float.parseFloat(txtTotal.getText());
             DefaultTableModel model = (DefaultTableModel) cashier.tblBill.getModel();
             model.addRow(new Object[]{
-                barcode,
+                barcode, 
                 name,
                 0.00,
                 rprice,

@@ -933,7 +933,7 @@ public class cashier extends javax.swing.JInternalFrame {
                     } else {
                         rprice = rs.getFloat("wprice");
                     }
-                    cost = rprice - bprice;
+                    cost = bprice;
                     String searchBarcode = txtSearchBarcode.getText();
                     if (searchBarcode.equals(barcode)) {
                         sameProduct = true;

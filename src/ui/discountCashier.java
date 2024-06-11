@@ -237,12 +237,12 @@ public class discountCashier extends javax.swing.JInternalFrame {
             for (int i = 0; i < cashier.tblBill.getRowCount(); i++) {
                 discounttot = discounttot + Float.parseFloat(cashier.tblBill.getValueAt(i, 5).toString());//* (Double.parseDouble(jTableBill.getValueAt(i, 1).toString()) * Double.parseDouble(jTableBill.getValueAt(i, 2).toString())
                 sum = sum + Float.parseFloat(cashier.tblBill.getValueAt(i, 6).toString());// - Double.parseDouble(tblBill.getValueAt(i, 4).toString());
-                item = Integer.parseInt(cashier.tblBill.getValueAt(i, 4).toString());
-                j = j + item;
+                item = item + Integer.parseInt(cashier.tblBill.getValueAt(i, 4).toString());
+                //j = j + item;
             }
             float returnamount = Float.parseFloat(cashier.txtReturn.getText());
             float finalsum = sum - returnamount;
-            cashier.txtItem.setText(Integer.toString(j));
+            cashier.txtItem.setText(Integer.toString(item));
             cashier.txtTotalAmount.setText(String.valueOf(new DecimalFormat("0.00").format(finalsum)));
             cashier.txtTotalDiscount.setText(String.valueOf(new DecimalFormat("0.00").format(discounttot)));
 
